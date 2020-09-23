@@ -1,8 +1,6 @@
-import { PrismaClient, User } from "@prisma/client"
+import { User } from "@prisma/client"
+import { prisma } from "../utils/constants";
 
-const prisma = new PrismaClient({
-    // log: ['query', 'info', 'warn', 'error'],
-})
 
 export class UserService {
 

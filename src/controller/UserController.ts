@@ -1,9 +1,6 @@
-import { PrismaClient, User } from "@prisma/client"
+import { User } from "@prisma/client"
 import { UserService } from "../server/UserService"
 
-const prisma = new PrismaClient({
-    log: ['query', 'info', 'warn', 'error'],
-  })
 const service: UserService = new UserService
 
 export class UserController {
