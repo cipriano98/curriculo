@@ -1,19 +1,22 @@
 # Inicializando o projeto:
-Execute:
+
+Para instalar as dependências
 ```
 yarn
 ```
-para instalar as dependências e
+
+Para inicializar o servidor
 ```
 yarn start
 ```
-para inicializar o servidor
 
 ## caso não possua o yarn instalado:
 ```
 npm install -g yarn
 ```
+
 # Prisma:
+
 Para salvar as alterações do banco (./prisma/schema.prisma) 
 ```
 yarn save
