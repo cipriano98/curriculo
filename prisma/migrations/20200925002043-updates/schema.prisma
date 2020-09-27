@@ -10,9 +10,8 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// * models
 model Profile {
-  id        Int      @default(autoincrement()) @id
+  id        String   @default(uuid()) @id
   bio       String?
   pseudonym String?
   User      User     @relation(fields: [userId], references: [id])
@@ -22,22 +21,22 @@ model Profile {
 }
 
 model User {
-  id         Int      @default(autoincrement()) @id
-  key        String   @default(uuid())
-  email      String   @unique
-  cpf        String   @unique
-  pass       String
-  firstname  String
-  middlename String?
-  lastname   String
-  nickname   String?
-  role       Role     @default(USER)
-  Profile    Profile
-  createdat  DateTime @default(now())
-  updatedat  DateTime @updatedAt
+  id        Int      @default(autoincrement()) @id
+  key       String   @default(uuid())
+  email     String   @unique
+  cpf       String   @unique
+  datebirth String
+  fullname  String
+  nickname  String?
+  role      Role     @default(CANDIDATE)
+  Profile   Profile?
+  createdat DateTime @default(now())
+  updatedat DateTime @updatedAt
 }
 
 enum Role {
   USER
+  CANDIDATE
+  EMPLOYER
   ADMIN
 }
