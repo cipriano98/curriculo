@@ -3,11 +3,10 @@ import cors from 'cors'
 
 import { appRouter } from './app.routes'
 
-
 const bodyParser = require('body-parser')
 
-
 class App {
+
     public server: express.Application
 
     public constructor() {
@@ -26,8 +25,6 @@ class App {
         this.server.use('/api', appRouter)
         // TODO: this.server.use('/api/curriculo', apiRouter)
     }
-
 }
-
 
 export default new App().server
