@@ -26,6 +26,7 @@
     "paths": {
       "@assets/*": ["./src/assets/*"],
       "@utils/*": ["./src/utils/*"],
+      "@config/*": ["./src/config/*"],
       "@prisma/*": ["./src/prisma/*"],
       "@interfaces/*": ["./src/interfaces/*"]
     }
