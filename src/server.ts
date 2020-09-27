@@ -1,17 +1,10 @@
-import { NestFactory } from '@nestjs/core';
-import { RoutesMapper } from '@nestjs/core/middleware/routes-mapper';
-import { AppModule } from './app.module';
+import server from './app'
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.use('/api', RoutesMapper)
+require('dotenv').config()
 
-  const port = process.env.PORT || 3333
-  await app.listen(port, '0.0.0.0', () => {
+const port = process.env.PORT || 3333
+
+server.listen(port, () => {
     console.clear()
-    console.log(`\nApp inicializado em http://localhost:${port}`)
-    console.log(`${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}\n`);
-  });
-}
-bootstrap();
- 
+    console.log(`\nApp inicializado em http://localhost:${port}\n`)
+})

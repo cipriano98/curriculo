@@ -1,38 +1,11 @@
 {
-  "compilerOptions": {
-    "target": "es2017",
-    "module": "commonjs",
-    "lib": [
-      "es6"
-    ],
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "allowJs": true,
-    "declaration": true,
-    "removeComments": true,
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/@types"
-    ],
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-    "paths": {
-      "@assets/*": ["./src/assets/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@prisma/*": ["./src/prisma/*"],
-      "@interfaces/*": ["./src/interfaces/*"]
+    "compilerOptions": {
+        "sourceMap": true,
+        "outDir": "dist",
+        "strict": true,
+        "lib": [
+            "esnext"
+        ],
+        "esModuleInterop": true
     }
-  },
-  "include": [
-    "src/**/*"
-  ],
-  "incremental": true
-
 }
