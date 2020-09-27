@@ -7,7 +7,6 @@ import {
   UserWhereInput,
   UserOrderByInput,
 } from '@prisma/client';
-import { ConfigModule } from '@nestjs/config';
 
 @Injectable()
 export class UserService {
