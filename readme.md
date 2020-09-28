@@ -3,8 +3,18 @@ Currículo Único - NestJS + Prisma + Postgress
 </h1>
 
 <p align="center">
-    My description app
-
+    <script>
+    const URL = 'https://raw.githubusercontent.com/cipriano98/curriculo/master/package.json';
+    const myRequest = new Request(URL);
+    fetch(myRequest)
+        .then(response => response.json())
+        .then(json => {
+            console.dir(json.description);
+            document.getElementById("description").innerHTML = json.description;
+        });
+    </script>
+    <span id="description"></span>
+    <!-- My description app -->
 </p>
 
 <p align="center">
