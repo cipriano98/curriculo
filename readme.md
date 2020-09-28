@@ -10,7 +10,7 @@ my name app - NestJS + Prisma + Postgress
   </a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
   <!-- <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a> -->
-  [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Abrir%20no%20insomina&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fcipriano98%2Fcurriculo%2Fmaster%2Finsominia.json)
+  <a href="https://insomnia.rest/run/?label=Abrir%20no%20insomina&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fcipriano98%2Fcurriculo%2Fmaster%2Finsominia.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
 </p>
 
 <hr>
