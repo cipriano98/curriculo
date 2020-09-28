@@ -1,21 +1,20 @@
-<h1 align="center">
-Currículo Único - NestJS + Prisma + Postgress
-</h1>
-
-<p align="center">
-    <script>
-    const URL = './package.json';
-    const myRequest = new Request(URL);
+<script>
+    const myRequest = new Request('./package.json');
     fetch(myRequest)
         .then(response => response.json())
         .then(json => {
             console.dir(json.description);
             document.getElementById("description").innerHTML = json.description;
         });
-    </script>
-    <span id="description"></span>
+      
+</script>
+
+<h1 align="center">
+Currículo Único - NestJS + Prisma + Postgress
+</h1>
+
+<p align="center" id="description">testesdadsad</p>
     <!-- My description app -->
-</p>
 
 <p align="center">
 
