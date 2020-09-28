@@ -3,7 +3,8 @@ Currículo Único - NestJS + Prisma + Postgress
 </h1>
 
 <p align="center">
-my description app
+    My description app
+
 </p>
 
 <p align="center">
@@ -40,7 +41,7 @@ my description app
 ## Participants
 
 | [<img src="https://avatars2.githubusercontent.com/u/56701750?s=400&v=4" width="75px;"/>](https://github.com/cipriano98) |
-| :------------------------------------------------------------------------------------------------------------------------: |
+| :---------------------------------------------------------------------------------------------------------------------: |
 
 
 | [Natan Cipriano](https://github.com/cipriano98)

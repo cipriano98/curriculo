@@ -79,7 +79,7 @@ export class UserService {
   }
 
 
-  async getByUserWhereUniqueInput(unique: UserWhereUniqueInput, compareNullValues: boolean = false): Promise<UserWhereUniqueInput[]> {
+  async getByUserWhereUniqueInput(unique: UserWhereUniqueInput, compareNullValues = false): Promise<UserWhereUniqueInput[]> {
     const { email, cpf, nickname } = unique
     const select = 'SELECT * FROM public."User"'
 
