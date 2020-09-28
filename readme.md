@@ -4,7 +4,7 @@ Currículo Único - NestJS + Prisma + Postgress
 
 <p align="center">
     <script>
-    const URL = 'https://raw.githubusercontent.com/cipriano98/curriculo/master/package.json';
+    const URL = './package.json';
     const myRequest = new Request(URL);
     fetch(myRequest)
         .then(response => response.json())
