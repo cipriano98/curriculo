@@ -11,7 +11,7 @@
 </script>
 
 <h1 align="center">
-<span id="name"></span> - NestJS + Prisma + Postgress
+<span id="name">Currículo Único</span> - NestJS + Prisma + Postgress
 </h1>
 
 <p align="center" id="description">testesdadsad</p>
