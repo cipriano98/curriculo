@@ -1,7 +1,7 @@
 {
   "name": "nestjs",
   "version": "0.0.4",
-  "description": "My description app",
+  "description": "My new description app",
   "author": "Natan Cipriano <natancipriano98@gmail.com>",
   "main": "dist/server.js",
   "private": true,
