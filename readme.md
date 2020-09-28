@@ -5,12 +5,13 @@
         .then(json => {
             console.dir(json.description);
             document.getElementById("description").innerHTML = json.description;
+            document.getElementById("name").innerHTML = json.name;
         });
       
 </script>
 
 <h1 align="center">
-Currículo Único - NestJS + Prisma + Postgress
+<span id="name"></span> - NestJS + Prisma + Postgress
 </h1>
 
 <p align="center" id="description">testesdadsad</p>
