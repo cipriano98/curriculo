@@ -9,7 +9,7 @@ async function bootstrap() {
   const port = process.env.PORT || 3333
   await app.listen(port, '0.0.0.0', () => {
     console.clear()
-    console.log(`\n${process.env.npm_package_NAME} inicializado em http://localhost:${port}`)
+    console.log(`\n${process.env.npm_package_NAME} is running in http://localhost:${port}`)
     console.log(process.env.npm_package_DESCRIPTION)
     console.log(`${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}\n`);
   });
