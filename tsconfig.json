@@ -32,8 +32,7 @@
     }
   },
   "include": [
-    "src/**/*",
-    "../install.js"
+    "src/**/*"
   ],
   "incremental": true
 
