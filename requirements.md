@@ -18,7 +18,7 @@ Code Challenge - NestJS + TypeORM + GraphQL
 ## Participants
 
 | [<img src="https://avatars2.githubusercontent.com/u/56701750?s=400&v=4" width="75px;"/>](https://github.com/cipriano98) |
-| :------------------------------------------------------------------------------------------------------------------------: |
+| :---------------------------------------------------------------------------------------------------------------------: |
 
 
 | [Natan Cipriano](https://github.com/cipriano98)
@@ -41,6 +41,7 @@ Code Challenge - NestJS + TypeORM + GraphQL
 - [x] Prisma
 - [x] Postgress
 - [ ] JWT
+- [ ] API POSTIMON CEP <!-- https://api.postmon.com.br/v1/cep/91787228 -->
 
 ## What can be better?
 

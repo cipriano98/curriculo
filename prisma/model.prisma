@@ -1,0 +1,80 @@
+
+// https://www.meucurriculoperfeito.com.br/criar-curriculo/section/cntc
+// & https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-schema/relations
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Profile {
+    id        String  @id @default(uuid())
+    bio       String?
+    pseudonym String?
+    User      User    @relation(fields: [userId], references: [id])
+    userId    Int     @unique
+
+    createdat DateTime @default(now())
+    updatedat DateTime @updatedAt
+}
+
+model User {
+    id                Int    @id @default(autoincrement())
+    authenticationkey String @default(uuid())
+    securitykey       String @default(uuid())
+
+    fullname         String
+    email            String  @unique
+    cpf              String  @unique
+    role             Role    @default(CANDIDATE)
+    datebirth        String?
+    nickname         String? @unique
+    preferencialname String?
+
+    Profile    Profile?
+    Address    Address[]
+    Contact    Contact[]
+    Curriculum Curriculum?
+
+    createdat    DateTime @default(now())
+    updatedat    DateTime @updatedAt
+}
+
+model Address {
+    id         String @id @default(uuid())
+    logradouro String
+    bairro     String
+    cidade     String
+    uf         String
+    cep        String
+
+    createdat DateTime @default(now())
+    updatedat DateTime @updatedAt
+    User      User     @relation(fields: [userid], references: [id])
+    userid    Int
+}
+
+model Contact {
+    id String @id @default(uuid())
+
+    createdat DateTime @default(now())
+    updatedat DateTime @updatedAt
+    User      User    @relation(fields: [userid], references: [id])
+    userid    Int
+
+}
+
+model Curriculum {
+    id   String @id @default(uuid())
+    User User @relation(fields: [userid], references: [id])
+    userid Int
+}
+
+enum Role {
+    CANDIDATE
+    EMPLOYER
+    ADMIN
+}
