@@ -1,27 +1,6 @@
 <h1 align="center">
-Code Challenge - NestJS + TypeORM + GraphQL
+Currículo Único - NestJS + prisma
 </h1>
-
-<p align="center">Simple GraphQL API with NestJS in Back-end. React and Apollo Client for Front-end.</p>
-
-<p align="center">
-  <a href="https://github.com/cipriano98/curriculo/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/rocketseat/youtube-challenge-nestjs-graphql?color=%237159c1&logoColor=%237159c1&style=flat" alt="Contributors">
-  </a>
-  <a href="https://opensource.org/licenses/MIT">
-    <img src="https://img.shields.io/github/license/rocketseat/youtube-challenge-nestjs-graphql?color=%237159c1&logo=mit" alt="License">
-  </a>
-</p>
-
-<hr>
-
-## Participants
-
-| [<img src="https://avatars2.githubusercontent.com/u/56701750?s=400&v=4" width="75px;"/>](https://github.com/cipriano98) |
-| :---------------------------------------------------------------------------------------------------------------------: |
-
-
-| [Natan Cipriano](https://github.com/cipriano98)
 
 ## Functional Requirements
 
