@@ -1,1 +1,1 @@
-web: yarn prisma
+web: yarn init-app
