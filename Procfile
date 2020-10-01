@@ -1,1 +1,1 @@
-web: yarn init-app
+web: yarn start
