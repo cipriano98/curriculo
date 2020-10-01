@@ -1,1 +1,1 @@
-web: yarn ts-dev
+web: yarn init-app

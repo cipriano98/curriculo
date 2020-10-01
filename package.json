@@ -5,6 +5,7 @@
     "author": "Natan Cipriano <natancipriano98@gmail.com>",
     "main": "dist/server.js",
     "private": true,
+    "repository": "https://github.com/cipriano98/curriculo.git",
     "license": "MIT",
     "scripts": {
         "rm-dist": "rimraf dist",
@@ -27,7 +28,7 @@
         "generate": "prisma generate",
         "studio": "prisma studio --port 3001",
         "prisma": "yarn save && yarn up && yarn generate",
-        "init-app": "yarn prisma && yarn start",
+        "init-app": "yarn prisma && yarn serve",
         "renew-app": "yarn rm && yarn init-app"
     },
     "dependencies": {
