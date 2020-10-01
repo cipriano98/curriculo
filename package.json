@@ -27,7 +27,7 @@
         "generate": "prisma generate",
         "studio": "prisma studio --port 3001",
         "prisma": "yarn save && yarn up && yarn generate",
-        "init-app": "npm i && yarn prisma && yarn start",
+        "init-app": "yarn prisma && yarn start",
         "renew-app": "yarn rm && yarn init-app"
     },
     "dependencies": {
