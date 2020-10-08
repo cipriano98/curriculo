@@ -10,7 +10,8 @@
     "scripts": {
         "rm-dist": "rimraf dist",
         "rm-nm": "rimraf node_modules",
-        "rm": "yarn rm-dist && yarn rm-nm",
+        "rm": "rimraf",
+        "rm-dnm": "yarn rm-dist && yarn rm-nm",
         "build": "nest build",
         "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
         "start": "node dist/server.js",
@@ -29,7 +30,7 @@
         "studio": "prisma studio --port 3001",
         "prisma": "yarn save && yarn up && yarn generate",
         "init-app": "yarn prisma && yarn serve",
-        "renew-app": "yarn rm && yarn init-app"
+        "renew-app": "yarn rm-dnm && yarn init-app"
     },
     "dependencies": {
         "@nestjs/common": "^7.0.0",
