@@ -3,14 +3,15 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    app.setGlobalPrefix('/api/v1');
 
-    // const port = process.env.PORT || 3333
-    // await app.listen(port, '0.0.0.0', () => {
-    //     console.clear()
-    //     console.log(`\n${process.env.npm_package_NAME} is running in http://localhost:${80}`)
-    //     console.log(process.env.npm_package_DESCRIPTION)
-    //     console.log(`${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}\n`);
-    // });
-      app.listenAsync(80, '0.0.0.0');
+    const server = await app.listen(process.env.PORT || 3333, '0.0.0.0', () => {
+        console.clear()
+        // console.dir(server)
+        console.log(`\n${process.env.npm_package_NAME} is running in http://localhost:${server.address().port}`)
+        console.log(process.env.npm_package_DESCRIPTION)
+        console.log(`${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}\n`);
+    });
 }
 bootstrap()
