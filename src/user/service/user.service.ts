@@ -42,9 +42,18 @@ export class UserService {
 
     async create(data: UserCreateInput): Promise<User | BadRequest | null> {
         try {
+            console.log('data')
+            console.dir(data)
+            // const hashedPassword = await bcrypt.hash(data.password, 10);
             const existsUser = await this.getByUserWhereUniqueInput(data, true)
-            if (!existsUser.length) return this.prisma.user.create({ data });
-
+            // existsUser.find(user => user.cpf === data.cpf);
+            console.dir(existsUser)
+            if (!existsUser.length) {
+                // const {  } = data
+                const newUser = this.prisma.user.create({ data });
+                console.dir(newUser)
+                return newUser
+            }
 
             // existsUser.some(element => {
             //     console.dir(element)
@@ -89,6 +98,7 @@ export class UserService {
 
         const condition = `cpf = '${cpf}' OR email = '${email}' OR (nickname = '${nickname}' ${andNotNicknameIsNull})`
         const getByUserWhereUniqueInput = await this.prisma.$queryRaw(`${select} WHERE ${condition};`)
+        console.log(`Query existsUser`)
         console.dir(`${select} WHERE ${condition};`)
 
         return getByUserWhereUniqueInput

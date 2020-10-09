@@ -1,7 +1,6 @@
 import { Controller, Response, Get, Param, Post, Body, Put, Delete, HttpCode, Query } from '@nestjs/common';
 import { UserService } from '../service/user.service';
 import { User as UserModel, UserWhereUniqueInput } from '@prisma/client';
-import { BadRequest } from '@interfaces/badRequest.interface';
 
 @Controller('user')
 //   @Controller('user')

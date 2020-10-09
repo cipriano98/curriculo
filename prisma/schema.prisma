@@ -23,10 +23,12 @@ model Profile {
 model User {
   id               Int      @default(autoincrement()) @id
   key              String   @default(uuid())
+  
+  secret           String?
   fullname         String
   email            String   @unique
   cpf              String   @unique
-  role             Role     @default(USER)
+  role             Role     @default(CANDIDATE)
   datebirth        String?
   nickname         String?  @unique
   preferencialname String?
