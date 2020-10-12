@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from '@prisma/prisma.service';
 import { BadRequest } from '@interfaces/badRequest.interface';
 import {
@@ -8,11 +8,13 @@ import {
     UserOrderByInput,
 } from '@prisma/client';
 
+const bcrypt = require('bcrypt');
+
 @Injectable()
 export class UserService {
     constructor(
-        private prisma: PrismaService,
-        private utils: PrismaService,
+        private readonly prisma: PrismaService,
+        private readonly utils: PrismaService,
     ) { }
 
     async getOne(id): Promise<User | null> {
@@ -42,37 +44,54 @@ export class UserService {
 
     async create(data: UserCreateInput): Promise<User | BadRequest | null> {
         try {
-            console.log('data')
-            console.dir(data)
-            // const hashedPassword = await bcrypt.hash(data.password, 10);
+            data.secret = await bcrypt.hash(data.secret, 10);
             const existsUser = await this.getByUserWhereUniqueInput(data, true)
             // existsUser.find(user => user.cpf === data.cpf);
-            console.dir(existsUser)
+            console.log(`existsUser: ${existsUser.length ? true : false}`)
             if (!existsUser.length) {
                 // const {  } = data
-                const newUser = this.prisma.user.create({ data });
-                console.dir(newUser)
-                return newUser
+                return await this.prisma.user.create({ data })
             }
 
             // existsUser.some(element => {
             //     console.dir(element)
             // })
 
-            return { message: 'oi', error: 'tchau' }
+            return {
+                message: 'email, cpf, nickname devem ser únicos',
+                error: 'Chave única duplicada'
+            }
         } catch (error) {
             return error.message
         }
     }
 
+    public async sigin(email: string, hashedPassword: string) {
+        try {
+            const user = await this.getByEmail(email);
+            const isPasswordMatching = await bcrypt.compare(
+                hashedPassword,
+                user.secret
+            );
+            if (!isPasswordMatching) {
+                throw new HttpException('Wrong credentials provided', HttpStatus.BAD_REQUEST);
+            }
+            user.secret = undefined;
+            return user;
+        } catch (error) {
+            throw new HttpException('Wrong credentials provided', HttpStatus.BAD_REQUEST);
+        }
+    }
+
     async update(params: {
-        where: UserWhereUniqueInput;
         data: UserUpdateInput;
+        where: UserWhereUniqueInput;
     }): Promise<User> {
         const { where, data } = params;
+        data.secret = await bcrypt.hash(data.secret, 10);
         return this.prisma.user.update({
             data,
-            where,
+            where
         });
     }
 

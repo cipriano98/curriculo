@@ -19,8 +19,6 @@ import { ValidatorModule } from './utils/validator/validator.module';
         ValidatorModule
     ],
     controllers: [HealthController],
-    providers: [
-        PrismaService,
-    ],
+    providers: [PrismaService],
 })
 export class AppModule { }

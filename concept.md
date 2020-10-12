@@ -34,7 +34,7 @@ O conceito desse trabalho será baseado de acordo com as funcionalidades realiza
 
 - [ ] Realizar uma funcionalidade de negócio (ou CRUD) que manipule duas entidades simultaneamente na aplicação como um todo (utilizando Web Services de forma correta e adequada);
 
-- [ ] Utilizar autenticação aplicando técnicas de segurança adequadamente (OAuth e JWT);
+- [x] Utilizar autenticação aplicando técnicas de segurança adequadamente (OAuth e JWT);
 
 - [x] Utilização de um sistema de controle de versão (ex: git) e de um ambiente de colaboração e gerenciamento de código baseado nesse controle de versão (ex: GitHub, Bitbucket);
 

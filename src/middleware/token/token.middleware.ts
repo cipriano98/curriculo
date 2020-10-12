@@ -49,7 +49,7 @@ export class TokenMiddleware implements NestMiddleware {
                 .status(403)
                 .send({
                     auth: false,
-                    message: 'Nenhum token fornecido.',
+                    message: 'Nenhum token fornecido',
                     warning: 'Realize o login e tente novamente'
                 });
         }
