@@ -1,6 +1,6 @@
 {
     "name": "curriculo-unico",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "My new description app",
     "author": "Natan Cipriano <natancipriano98@gmail.com>",
     "main": "dist/server.js",
@@ -27,7 +27,7 @@
         "save": "prisma migrate save --create-db --experimental",
         "up": "prisma migrate up --experimental --verbose",
         "generate": "prisma generate",
-        "studio": "prisma studio --port 3001",
+        "studio": "prisma studio",
         "prisma": "yarn save && yarn up && yarn generate",
         "init-app": "yarn prisma && yarn serve",
         "renew-app": "yarn rm-dnm && yarn init-app"
