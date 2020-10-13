@@ -27,6 +27,7 @@ model User {
 
     fullname         String
     secret           String?
+    ativo            Boolean @default(true)
     email            String  @unique
     cpf              String  @unique
     role             Role    @default(CANDIDATE)
@@ -52,16 +53,16 @@ model Address {
     uf         String
     cep        String
 
-    createdat  DateTime @default(now())
-    updatedat  DateTime @updatedAt
-    User       User     @relation(fields: [userid], references: [id])
-    userid     Int
+    createdat DateTime @default(now())
+    updatedat DateTime @updatedAt
+    User      User     @relation(fields: [userid], references: [id])
+    userid    Int
 }
 
 model Contact {
-    id        String @id @default(uuid())
-    User      User     @relation(fields: [userid], references: [id])
-    userid    Int
+    id     String @id @default(uuid())
+    User   User   @relation(fields: [userid], references: [id])
+    userid Int
 
     createdat DateTime @default(now())
     updatedat DateTime @updatedAt
@@ -81,23 +82,23 @@ enum Role {
 }
 
 model Company {
-    id              String   @id @default(uuid())
+    id              String  @id @default(uuid())
     name            String
     registrofederal String
-    ativo           Boolean
-    role            Role     @default(EMPLOYER)
+    ativo           Boolean @default(false)
+    role            Role    @default(EMPLOYER)
 
-    createdat       DateTime @default(now())
-    updatedat       DateTime @updatedAt
+    createdat DateTime @default(now())
+    updatedat DateTime @updatedAt
 }
 
 model Agency {
-    id              String   @id @default(uuid())
+    id              String  @id @default(uuid())
     name            String
     registrofederal String
-    ativo           Boolean
-    role            Role     @default(EMPLOYER)
+    ativo           Boolean @default(false)
+    role            Role    @default(EMPLOYER)
 
-    createdat       DateTime @default(now())
-    updatedat       DateTime @updatedAt
+    createdat DateTime @default(now())
+    updatedat DateTime @updatedAt
 }
