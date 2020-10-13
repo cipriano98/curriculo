@@ -1,0 +1,181 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>curriculo-unico documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	      <link rel="stylesheet" href="./styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">curriculo-unico documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<script>
+    const myRequest = new Request('./package.json');
+    fetch(myRequest)
+        .then(response => response.json())
+        .then(json => {
+            console.dir(json.description);
+            document.getElementById("description").innerHTML = json.description;
+            document.getElementById("name").innerHTML = json.name;
+        });
+
+</script>
+
+<h1 align="center">
+<span id="name">Currículo Único</span> - NestJS + Prisma + Postgress
+</h1>
+
+<p align="center" id="description">testesdadsad</p>
+    <!-- My description app -->
+
+<p align="center">
+
+  <a href="https://github.com/cipriano98/curriculo/graphs/contributors">
+    <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/cipriano98/curriculo">
+  </a>
+  <a href="https://github.com/cipriano98/curriculo/graphs/contributors">
+    <img alt="GitHub package.json dependency version (dev dep on branch)" src="https://img.shields.io/github/package-json/dependency-version/cipriano98/curriculo/dev/@nestjs/cli">
+  </a>
+  <a href="https://github.com/cipriano98/curriculo/graphs/contributors">
+    <img alt="GitHub package.json dependency version (dev dep on branch)" src="https://img.shields.io/github/package-json/dependency-version/cipriano98/curriculo/dev/@prisma/cli">
+  </a>
+  <a href="https://github.com/cipriano98/curriculo/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/rocketseat/youtube-challenge-nestjs-graphql?color=%237159c1&logoColor=%237159c1&style=flat" alt="Contributors">
+  </a>
+  <a href="https://opensource.org/licenses/MIT">
+      <img src="https://img.shields.io/github/license/cipriano98/curriculo" alt="Package License"/>
+  </a>
+  <!-- <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a> -->
+
+  <a href="https://insomnia.rest/run/?uri=https%3A%2F%2Fraw.githubusercontent.com%2Fcipriano98%2Fcurriculo%2Fmaster%2Finsominia.json" target="_blank">
+      <img src="https://img.shields.io/github/languages/top/cipriano98/curriculo" alt="Most used language">
+  </a>
+  <a href="https://insomnia.rest/run/?uri=https%3A%2F%2Fraw.githubusercontent.com%2Fcipriano98%2Fcurriculo%2Fmaster%2Finsominia.json" target="_blank">
+      <img src="https://img.shields.io/badge/Run%20in%20Insomnia-Rest-blueviolet" alt="Run in Insomnia">
+  </a>
+
+</p>
+
+
+<hr>
+
+<h2 id="participants">Participants</h2>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th align="center"><a href="https://github.com/cipriano98"><img src="https://avatars2.githubusercontent.com/u/56701750?s=400&v=4" width="75px;"/></a></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p>| <a href="https://github.com/cipriano98">Natan Cipriano</a></p>
+<br>
+<br>
+
+<h1 id="getting-started">Getting started</h1>
+<h2 id="to-install-the-dependencies">To install the dependencies</h2>
+<div><pre class="line-numbers"><code class="language-bash">yarn</code></pre></div><h2 id="to-boot-the-server">To boot the server</h2>
+<div><pre class="line-numbers"><code class="language-bash">yarn start # to start in production mode
+#  OR
+yarn ts-dev # to start in development mode
+</code></pre></div><h2 id="if-you-dont-have-yarn-installed">If you don&#39;t have yarn installed:</h2>
+<div><pre class="line-numbers"><code class="language-none">npm install -g yarn</code></pre></div><h1 id="prisma">Prisma:</h1>
+<h2 id="to-save-changes-to-the-database-prismaschemaprisma">To save changes to the database (./prisma/schema.prisma)</h2>
+<div><pre class="line-numbers"><code class="language-bash">yarn save
+# OR
+npx prisma migrate save --name nameOfYourMigrate --experimental</code></pre></div><h2 id="to-apply-changes">To apply changes</h2>
+<div><pre class="line-numbers"><code class="language-bash">yarn up</code></pre></div><h2 id="to-generate-the-interfaces-from-the-changes-made">To generate the interfaces from the changes made</h2>
+<div><pre class="line-numbers"><code class="language-bash">yarn generate</code></pre></div><h2 id="to-have-access-to-a-graphical-interface-of-your-database">To have access to a graphical interface of your database</h2>
+<div><pre class="line-numbers"><code class="language-bash">yarn studio</code></pre></div><h2 id="shortcuts">Shortcuts:</h2>
+<div><pre class="line-numbers"><code class="language-bash"># yarn save &amp;&amp; yarn up &amp;&amp; yarn generate
+yarn prisma</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="./js/menu-wc.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
