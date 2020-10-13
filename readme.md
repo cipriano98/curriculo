@@ -29,9 +29,7 @@
     <img src="https://img.shields.io/github/license/cipriano98/curriculo" alt="Package License"/>
 </a>
 
-<img title="coverage documentation" src="./documentation/images/coverage-badge-documentation.svg" alt="coverage documentation"/>
-
-<img title="coverage documentation" src="https://github.com/cipriano98/curriculo/blob/master/documentation/images/coverage-badge-documentation.svg" alt="coverage documentation"/>
+<img title="coverage documentation" src="https://raw.githubusercontent.com/cipriano98/curriculo/8e1e56caf1862073291cf8fccd3aa8d2d840f66f/documentation/images/coverage-badge-documentation.svg" alt="coverage documentation"/>
 
 <!-- <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a> -->
 
