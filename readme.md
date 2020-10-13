@@ -10,14 +10,16 @@
     }
 </style>
 
-<div>
-    <h1 style="text-align: center; padding-bottom: 20px; padding-top: 5px;">
-        Currículo Único - NestJS + Prisma + Postgress
-    </h1>
-</div>
 
-<h3 class="center"> My new Description app </h3>
-<hr class="description">
+<h1 style="text-align: center; padding-bottom: 20px; padding-top: 5px;">
+    Currículo Único - NestJS + Prisma + Postgress
+</h1>
+
+
+<h3 style="text-align: center; padding-bottom: 20px; padding-top: 5px;">
+    My new Description app
+</h3>
+<hr style="width: 50%">
 
 <div class="center">
 
