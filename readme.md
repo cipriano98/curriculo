@@ -1,13 +1,25 @@
+<style>
+    .center {
+        text-align: center;
+        padding-bottom: 20px;
+        padding-top: 5px;
+    }
+
+    hr.description {
+        width: 50%
+    }
+</style>
+
 <div>
-    <h1 align="center">
-    Currículo Único - NestJS + Prisma + Postgress
-</h1>
+    <h1 class="center">
+        Currículo Único - NestJS + Prisma + Postgress
+    </h1>
 </div>
 
-<div align="center">My new Description app</div>
-    <!-- My description app -->
+<h3 class="center"> My new Description app </h3>
+<hr class="description">
 
-<div align="center">
+<div class="center">
 
 <a href="https://github.com/cipriano98/curriculo/graphs/contributors">
 <img title="Versão da aplicação" alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/cipriano98/curriculo">
@@ -41,8 +53,6 @@
     
 </div>
 
-
-<hr>
 
 ## Participants
 
