@@ -7,8 +7,7 @@ import {
     UserWhereInput,
     UserOrderByInput,
 } from '@prisma/client';
-
-const bcrypt = require('bcrypt');
+import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class UserService {
