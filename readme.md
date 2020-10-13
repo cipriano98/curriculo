@@ -11,7 +11,7 @@
 </style>
 
 <div>
-    <h1 class="center">
+    <h1 style="text-align: center; padding-bottom: 20px; padding-top: 5px;">
         Currículo Único - NestJS + Prisma + Postgress
     </h1>
 </div>
