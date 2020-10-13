@@ -1,49 +1,47 @@
-<script>
-    const myRequest = new Request('./package.json');
-    fetch(myRequest)
-        .then(response => response.json())
-        .then(json => {
-            console.dir(json.description);
-            document.getElementById("description").innerHTML = json.description;
-            document.getElementById("name").innerHTML = json.name;
-        });
-      
-</script>
-
-<h1 align="center">
-<span id="name">Currículo Único</span> - NestJS + Prisma + Postgress
+<div>
+    <h1 align="center">
+    Currículo Único - NestJS + Prisma + Postgress
 </h1>
+</div>
 
-<p align="center" id="description">testesdadsad</p>
+<div align="center">My new Description app</div>
     <!-- My description app -->
 
-<p align="center">
+<div align="center">
 
-  <a href="https://github.com/cipriano98/curriculo/graphs/contributors">
-    <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/cipriano98/curriculo">
-  </a>
-  <a href="https://github.com/cipriano98/curriculo/graphs/contributors">
-    <img alt="GitHub package.json dependency version (dev dep on branch)" src="https://img.shields.io/github/package-json/dependency-version/cipriano98/curriculo/dev/@nestjs/cli">
-  </a>
-  <a href="https://github.com/cipriano98/curriculo/graphs/contributors">
-    <img alt="GitHub package.json dependency version (dev dep on branch)" src="https://img.shields.io/github/package-json/dependency-version/cipriano98/curriculo/dev/@prisma/cli">
-  </a>
-  <a href="https://github.com/cipriano98/curriculo/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/rocketseat/youtube-challenge-nestjs-graphql?color=%237159c1&logoColor=%237159c1&style=flat" alt="Contributors">
-  </a>
-  <a href="https://opensource.org/licenses/MIT">
-      <img src="https://img.shields.io/github/license/cipriano98/curriculo" alt="Package License"/>
-  </a>
-  <!-- <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a> -->
+<a href="https://github.com/cipriano98/curriculo/graphs/contributors">
+<img title="Versão da aplicação" alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/cipriano98/curriculo">
+</a>
 
-  <a href="https://insomnia.rest/run/?uri=https%3A%2F%2Fraw.githubusercontent.com%2Fcipriano98%2Fcurriculo%2Fmaster%2Finsominia.json" target="_blank">
-      <img src="https://img.shields.io/github/languages/top/cipriano98/curriculo" alt="Most used language">
-  </a>
-  <a href="https://insomnia.rest/run/?uri=https%3A%2F%2Fraw.githubusercontent.com%2Fcipriano98%2Fcurriculo%2Fmaster%2Finsominia.json" target="_blank">
-      <img src="https://img.shields.io/badge/Run%20in%20Insomnia-Rest-blueviolet" alt="Run in Insomnia">
+<a href="https://github.com/cipriano98/curriculo/graphs/contributors">
+<img alt="GitHub package.json dependency version (dev dep on branch)" src="https://img.shields.io/github/package-json/dependency-version/cipriano98/curriculo/dev/@nestjs/cli">
+</a>
+
+<a href="https://github.com/cipriano98/curriculo/graphs/contributors">
+<img alt="GitHub package.json dependency version (dev dep on branch)" src="https://img.shields.io/github/package-json/dependency-version/cipriano98/curriculo/dev/@prisma/cli">
+</a>
+
+<a href="https://github.com/cipriano98/curriculo/graphs/contributors">
+<img title="Contributors" src="https://img.shields.io/github/contributors/rocketseat/youtube-challenge-nestjs-graphql?color=%237159c1&logoColor=%237159c1&style=flat" alt="">
+</a>
+
+<a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/github/license/cipriano98/curriculo" alt="Package License"/>
+</a>
+
+<img title="coverage documentation" src="./documentation/images/coverage-badge-documentation.svg" alt="coverage documentation"/>
+
+<img title="coverage documentation" src="https://github.com/cipriano98/curriculo/blob/master/documentation/images/coverage-badge-documentation.svg" alt="coverage documentation"/>
+
+<!-- <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a> -->
+
+<img title="Most used language" src="https://img.shields.io/github/languages/top/cipriano98/curriculo" alt="Most used language">
+
+<a href="https://insomnia.rest/run/?uri=https%3A%2F%2Fraw.githubusercontent.com%2Fcipriano98%2Fcurriculo%2Fmaster%2Finsominia.json" target="_blank">
+      <img title="Run in Insomnia" src="https://img.shields.io/badge/Run%20in%20Insomnia-Rest-blueviolet" alt="Run in Insomnia">
   </a>
     
-</p>
+</div>
 
 
 <hr>
