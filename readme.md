@@ -1,4 +1,4 @@
-<style>
+<!-- <style>
     .center {
         text-align: center;
         padding-bottom: 20px;
@@ -8,7 +8,7 @@
     hr.description {
         width: 50%
     }
-</style>
+</style> -->
 
 
 <h1 style="text-align: center; padding-bottom: 20px; padding-top: 5px;">
