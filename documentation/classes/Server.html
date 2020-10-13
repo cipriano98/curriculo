@@ -3,22 +3,23 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>curriculo-unico documentation</title>
+        <title>Curriculo Único Doc</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	      <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/stripe.css">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">curriculo-unico documentation</a>
+            <a href="../" class="navbar-brand">Curriculo Único Doc</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Digite para pesquisar"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -57,7 +58,7 @@
 <div class="tab-content">
     <div class="tab-pane fade active in" id="c-info">
         <p class="comment">
-            <h3>File</h3>
+            <h3>Arquivo</h3>
         </p>
         <p class="comment">
             <code>src/server.ts</code>
@@ -74,7 +75,7 @@
 
                 <tr>
                     <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
+                        <h6><b>Métodos</b></h6>
                     </td>
                 </tr>
                 <tr>
@@ -101,7 +102,7 @@
             <section>
     
     <h3 id="methods">
-        Methods
+        Métodos
     </h3>
     <table class="table table-sm table-bordered">
         <tbody>
@@ -127,8 +128,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="15"
-                            class="link-to-prism">src/server.ts:15</a></div>
+                    <div class="io-line">Definido em <a href="" data-line="25"
+                            class="link-to-prism">src/server.ts:25</a></div>
                 </td>
             </tr>
 
@@ -137,7 +138,7 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                        <b>Retorna : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                     </div>
                 </td>
@@ -158,11 +159,21 @@
 import { AppModule } from &#x27;./app.module&#x27;;
 import { UnlessMiddleware } from &#x27;./middleware/router/unless.middleware&#x27;;
 import { TokenMiddleware } from &#x27;./middleware/token/token.middleware&#x27;;
-
+/**
+ * export const globalPrefix &#x3D; &#x27;/api/v1&#x27;
+ */
 export const globalPrefix &#x3D; &#x27;/api/v1&#x27;
+/**
+ * unless Middleware
+ */
 const unlessMiddleware &#x3D; new UnlessMiddleware()
+/**
+ * token Middleware
+ */
 const tokenMiddleware &#x3D; new TokenMiddleware()
-
+/**
+ * hot reload
+ */
 declare const module: any;
 
 
@@ -170,15 +181,15 @@ export class Server {
 
     async bootstrap() {
         const app &#x3D; await NestFactory.create(AppModule);
-    
+
         app.setGlobalPrefix(globalPrefix);
-    
+
         app.use(unlessMiddleware.use(
             tokenMiddleware.use,
             &#x60;${globalPrefix}/user/signin&#x60;,
             &#x60;${globalPrefix}/health/status&#x60;,
         ))
-    
+
         const server &#x3D; await app.listen(process.env.PORT || 3333, &#x27;0.0.0.0&#x27;, () &#x3D;&gt; {
             console.clear()
             // console.dir(server)
@@ -186,7 +197,7 @@ export class Server {
             console.log(process.env.npm_package_DESCRIPTION)
             console.log(&#x60;${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}\n&#x60;);
         });
-    
+
         if (module.hot) {
             module.hot.accept();
             module.hot.dispose(() &#x3D;&gt; app.close());
@@ -209,7 +220,7 @@ export class Server {
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
-        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title">Nenhum resultado correspondente "<span class='search-query'></span>"</h1>
     </div>
 </div>
 </div>
