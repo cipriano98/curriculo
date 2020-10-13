@@ -109,6 +109,12 @@ export class UserService {
     }
 
 
+    /**
+     * @param unique Recebe os campos unique do usuário
+     * @param compareNullValues Recebe uma condição para pesquisa que compara ou não valores nulos `default: false`
+     * @description Este método verifica de acordo com os parâmetros, a existência desses usuários
+     * @returns Retorna um array de todos os usuários que estão nesta condição
+     * */
     async getByUserWhereUniqueInput(unique: UserWhereUniqueInput, compareNullValues = false): Promise<UserWhereUniqueInput[]> {
         const { email, cpf, nickname } = unique
         const select = 'SELECT * FROM public."User"'

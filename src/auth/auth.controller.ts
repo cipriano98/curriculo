@@ -54,7 +54,7 @@ export class AuthController {
                 console.dir(userLoggedIn)
                 if (userLoggedIn) {
                     const secret = process.env.SERVER_SECRET_TOKEN || 'Currículo→Único';
-                    const token = jwt.sign({ email: data.email, _id: data.id }, secret, { expiresIn: '60s' });
+                    const token = jwt.sign({ email: data.email, _id: data.id }, secret, { expiresIn: '2h' });
 
                     console.log('\nUsuario', data.email, 'acaba de fazer login no sistema');
                     console.log("x-access-token:", token, '\n');
