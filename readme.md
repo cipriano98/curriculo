@@ -19,7 +19,7 @@
 <h3 align="center">
     My new Description app
 </h3>
-<hr style="width: 50%">
+<hr width="50%">
 
 <div align="center">
 
