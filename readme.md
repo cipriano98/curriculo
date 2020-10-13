@@ -11,17 +11,17 @@
 </style> -->
 
 
-<h1 align="center">
+<div align="center">
+<h1>
     Currículo Único - NestJS + Prisma + Postgress
 </h1>
 
 
-<h3 align="center">
+<h3>
     My new Description app
 </h3>
-<hr align="center" width="50%">
-
-<div align="center">
+<hr  width="50%">
+<br>
 
 <a href="https://github.com/cipriano98/curriculo/graphs/contributors">
 <img title="Versão da aplicação" alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/cipriano98/curriculo">
@@ -54,7 +54,7 @@
   </a>
     
 </div>
-
+<br>
 
 ## Participants
 
