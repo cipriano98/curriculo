@@ -22,6 +22,9 @@ import { AgencyModule } from './agency/agency.module';
         AgencyModule
     ],
     controllers: [HealthController],
-    providers: [PrismaService, AgencyService],
+    providers: [
+        PrismaService,
+        AgencyService
+    ],
 })
 export class AppModule { }

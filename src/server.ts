@@ -35,7 +35,15 @@ export class Server {
 
         const server = await app.listen(process.env.PORT || 3333, '0.0.0.0', () => {
             console.clear()
-            // console.dir(server)
+            console.log(`
+                 ######  ##     ## ########  ########  ####  ######  ##     ## ##        #######     ##     ## ##    ## ####  ######   #######  
+                ##    ## ##     ## ##     ## ##     ##  ##  ##    ## ##     ## ##       ##     ##    ##     ## ###   ##  ##  ##    ## ##     ## 
+                ##       ##     ## ##     ## ##     ##  ##  ##       ##     ## ##       ##     ##    ##     ## ####  ##  ##  ##       ##     ## 
+                ##       ##     ## ########  ########   ##  ##       ##     ## ##       ##     ##    ##     ## ## ## ##  ##  ##       ##     ## 
+                ##       ##     ## ##   ##   ##   ##    ##  ##       ##     ## ##       ##     ##    ##     ## ##  ####  ##  ##       ##     ## 
+                ##    ## ##     ## ##    ##  ##    ##   ##  ##    ## ##     ## ##       ##     ##    ##     ## ##   ###  ##  ##    ## ##     ## 
+                 ######   #######  ##     ## ##     ## ####  ######   #######  ########  #######      #######  ##    ## ####  ######   #######
+            `)
             console.log(`\n${process.env.npm_package_NAME} is running in http://localhost:${server.address().port + globalPrefix}`)
             console.log(process.env.npm_package_DESCRIPTION)
             console.log(`${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}\n`);
