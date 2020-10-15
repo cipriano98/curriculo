@@ -1,6 +1,6 @@
 import { Controller, Response, Get, Param, Post, Body, Put, Delete, HttpCode, Query } from '@nestjs/common';
 import { AgencyService } from './agency.service';
-import { Agency as AgencyModel, UserWhereUniqueInput as AgencyWhereUniqueInput } from '@prisma/client';
+import { Agency as AgencyModel, AgencyWhereUniqueInput } from '@prisma/client';
 
 @Controller('agency')
 export class AgencyController {
