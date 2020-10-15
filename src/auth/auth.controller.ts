@@ -38,7 +38,7 @@ export class AuthController {
 
 
     @Post('/signin')
-    public async autenticar(@Res() res, @Body() data): Promise<any> {
+    public async signin(@Res() res, @Body() data): Promise<any> {
         console.dir(data)
         if (data.email === '' || data.secret === '') {
             return res.status(400).json({ auth: false, message: 'Os campos devem ser preenchidos corretamente' });
@@ -54,9 +54,14 @@ export class AuthController {
                 console.dir(userLoggedIn)
                 if (userLoggedIn) {
                     const secret = process.env.SERVER_SECRET_TOKEN || 'Currículo→Único';
-                    const token = jwt.sign({ email: data.email, _id: data.id }, secret, { expiresIn: '2h' });
+                    const token = jwt.sign({
+                        id: existsUser.id,
+                        email: existsUser.email,
+                        role: existsUser.role,
+                        name: existsUser.preferencialname || existsUser.nickname || existsUser.fullname,
+                    }, secret, { expiresIn: '2h' });
 
-                    console.log('\nUsuario', data.email, 'acaba de fazer login no sistema');
+                    console.log(`\n${existsUser.role} ${existsUser.email} acaba de fazer login no sistema`);
                     console.log("x-access-token:", token, '\n');
 
                     res.status(200).json({

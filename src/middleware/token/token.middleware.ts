@@ -9,7 +9,7 @@ export class TokenMiddleware implements NestMiddleware {
     use(@Req() req, @Res() res, @Next() next) {
 
         const authorizedLog = logedIn => {
-            console.log('\nAcesso permitido ao usuário', logedIn.email)
+            console.log('\nAcesso permitido ao usuário', logedIn.name)
             console.log("by temAcesso")
 
             console.log("\n")
@@ -18,7 +18,6 @@ export class TokenMiddleware implements NestMiddleware {
             console.log("on:", dataUTC, 'at', horaUTC);
             console.log("by AuthMiddleware\n");
         }
-
 
         const hasAccess = logedIn => {
 

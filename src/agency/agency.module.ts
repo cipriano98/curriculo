@@ -6,11 +6,11 @@ import { AgencyController } from './agency.controller';
 @Module({
     imports: [],
     controllers: [
-        // AgencyController
-    AgencyController],
+        AgencyController
+    ],
     providers: [
         AgencyService,
         PrismaService
     ],
 })
-export class AgencyModule {}
+export class AgencyModule { }
