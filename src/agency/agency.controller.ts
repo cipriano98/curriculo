@@ -10,8 +10,8 @@ export class AgencyController {
 
     @Post('/')
     @HttpCode(201)
-    async signup(@Response() res, @Body() userData): Promise<AgencyModel> {
-        const newUser = await this.agencyService.create(userData)
+    async signup(@Response() res, @Body() agencyData): Promise<AgencyModel> {
+        const newUser = await this.agencyService.create(agencyData)
         if (newUser.hasOwnProperty('id')) return res.status(201).json(newUser)
         return res.status(400).json(newUser)
     }
@@ -24,22 +24,22 @@ export class AgencyController {
 
     @Get('/:id')
     @HttpCode(200)
-    async getOne(@Param('id') id: AgencyWhereUniqueInput): Promise<AgencyModel> {
+    async getOne(@Param('id') id): Promise<AgencyModel> {
         return this.agencyService.getOne(id)
     }
 
     @Delete('/:id')
     @HttpCode(200)
-    async delete(@Param('id') id: string): Promise<AgencyModel> {
-        return this.agencyService.delete({ id: Number(id) });
+    async delete(@Param('id') id): Promise<AgencyModel> {
+        return this.agencyService.delete({ id: id });
     }
 
     @Put('/:id')
     @HttpCode(200)
-    async update(@Body() data, @Param('id') id: string): Promise<AgencyModel> {
+    async update(@Body() data, @Param('id') id): Promise<AgencyModel> {
         return this.agencyService.update({
             data: { ...data },
-            where: { id: Number(id) },
+            where: { id: id },
         });
     }
 

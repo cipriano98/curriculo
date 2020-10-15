@@ -87,7 +87,7 @@ export class UserService {
         where: UserWhereUniqueInput;
     }): Promise<User> {
         const { where, data } = params;
-        data.secret = await bcrypt.hash(data.secret, 10);
+        if(data.secret) data.secret = await bcrypt.hash(data.secret, 10);
         return this.prisma.user.update({
             data,
             where

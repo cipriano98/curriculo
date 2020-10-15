@@ -30,6 +30,7 @@ export class Server {
         app.use(unlessMiddleware.use(
             tokenMiddleware.use,
             `${globalPrefix}/user/signin`,
+            `${globalPrefix}/user/signup`,
             `${globalPrefix}/health/status`,
         ))
 

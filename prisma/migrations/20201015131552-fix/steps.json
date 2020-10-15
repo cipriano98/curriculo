@@ -1,0 +1,68 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateEnum",
+      "enum": "Gender",
+      "values": [
+        "MASCULINO",
+        "FEMININO",
+        "OUTRO"
+      ]
+    },
+    {
+      "tag": "CreateField",
+      "model": "User",
+      "field": "gender",
+      "type": "Gender",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "gender"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "User",
+          "field": "gender"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "OUTRO"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Company",
+          "field": "registrofederal"
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Agency",
+          "field": "registrofederal"
+        },
+        "directive": "unique"
+      }
+    }
+  ]
+}

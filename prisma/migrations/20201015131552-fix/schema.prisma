@@ -2,7 +2,7 @@
 // & https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-schema/relations
 datasource db {
     provider = "postgresql"
-    url      = env("DATABASE_URL")
+    url = "***"
 }
 
 generator client {
@@ -34,7 +34,7 @@ model User {
     datebirth        String?
     nickname         String? @unique
     preferencialname String?
-    gender           Gender
+    gender           Gender  @default(OUTRO)
 
     Profile    Profile?
     Address    Address[]
@@ -76,14 +76,17 @@ model Curriculum {
     userid Int
 }
 
+enum Role {
+    CANDIDATE
+    EMPLOYER
+    ADMIN
+}
+
 model Company {
     id              String  @id @default(uuid())
     name            String
     registrofederal String  @unique
-    site            String?  @unique
-    links           String[]
-    labellinks      String[]
-    ativo           Boolean @default(true)
+    ativo           Boolean @default(false)
     role            Role    @default(EMPLOYER)
 
     createdat DateTime @default(now())
@@ -94,11 +97,8 @@ model Agency {
     id              String  @id @default(uuid())
     name            String
     registrofederal String  @unique
-    site            String  @unique
-    links           String[]
-    labellinks      String[]
-    ativo           Boolean @default(true)
-    role            Role    @default(VACANCYDISTRIBUTOR)
+    ativo           Boolean @default(false)
+    role            Role    @default(EMPLOYER)
 
     createdat DateTime @default(now())
     updatedat DateTime @updatedAt
@@ -108,11 +108,4 @@ enum Gender {
     MASCULINO
     FEMININO
     OUTRO
-}
-
-enum Role {
-    CANDIDATE
-    EMPLOYER
-    ADMIN
-    VACANCYDISTRIBUTOR
 }

@@ -2,12 +2,10 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from '@prisma/prisma.service';
 import { BadRequest } from '@interfaces/badRequest.interface';
 import {
-    UserUpdateInput, User, UserCreateInput, UserWhereUniqueInput,
-    ProfileCreateOneWithoutUserInput,
-    UserWhereInput,
-    UserOrderByInput,
+    AgencyUpdateInput, Agency, AgencyCreateInput, AgencyWhereUniqueInput,
+    AgencyWhereInput,
+    AgencyOrderByInput,
 } from '@prisma/client';
-import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class AgencyService {
@@ -16,10 +14,10 @@ export class AgencyService {
         private readonly utils: PrismaService,
     ) { }
 
-    async getOne(id): Promise<User | null> {
-        return this.prisma.user.findOne({
+    async getOne(id): Promise<Agency | null> {
+        return this.prisma.agency.findOne({
             where: {
-                id: Number(id)
+                id
             },
         });
     }
@@ -28,11 +26,11 @@ export class AgencyService {
         skip?: string
         take?: string
         orderBy?: any
-    }): Promise<User[]> {
+    }): Promise<Agency[]> {
 
         const orderBy = query.orderBy ? query.orderBy.split(',') : []
 
-        return this.prisma.user.findMany({
+        return this.prisma.agency.findMany({
             skip: Number(query.skip) || 0,
             take: Number(query.take) || 100,
             orderBy: orderBy?.length ? { [orderBy[0]]: orderBy[1] } : {
@@ -41,23 +39,19 @@ export class AgencyService {
         });
     }
 
-    async create(data: UserCreateInput): Promise<User | BadRequest | null> {
+    async create(data: AgencyCreateInput): Promise<Agency | BadRequest | null> {
+        const { registrofederal, site } = data
         try {
-            data.secret = await bcrypt.hash(data.secret, 10);
-            const existsUser = await this.getByUserWhereUniqueInput(data, true)
-            // existsUser.find(user => user.cpf === data.cpf);
-            console.log(`existsUser: ${existsUser.length ? true : false}`)
-            if (!existsUser.length) {
-                // const {  } = data
-                return await this.prisma.user.create({ data })
+            const existsAgency = await this.getByAgencyWhereUniqueInput({ registrofederal, site })
+            existsAgency.find(agency => agency.registrofederal === data.registrofederal);
+            console.log(`existsAgency: ${existsAgency.length ? true : false}`)
+            if (!existsAgency.length) {
+                const {  } = data
+                return await this.prisma.agency.create({ data })
             }
 
-            // existsUser.some(element => {
-            //     console.dir(element)
-            // })
-
             return {
-                message: 'email, cpf, nickname devem ser únicos',
+                message: 'Registro federal e site devem ser únicos',
                 error: 'Chave única duplicada'
             }
         } catch (error) {
@@ -65,48 +59,22 @@ export class AgencyService {
         }
     }
 
-    public async sigin(email: string, hashedPassword: string) {
-        try {
-            const user = await this.getByEmail(email);
-            const isPasswordMatching = await bcrypt.compare(
-                hashedPassword,
-                user.secret
-            );
-            if (!isPasswordMatching) {
-                throw new HttpException('Wrong credentials provided', HttpStatus.BAD_REQUEST);
-            }
-            user.secret = undefined;
-            return user;
-        } catch (error) {
-            throw new HttpException('Wrong credentials provided', HttpStatus.BAD_REQUEST);
-        }
-    }
-
     async update(params: {
-        data: UserUpdateInput;
-        where: UserWhereUniqueInput;
-    }): Promise<User> {
+        data: AgencyUpdateInput;
+        where: AgencyWhereUniqueInput;
+    }): Promise<Agency> {
         const { where, data } = params;
-        data.secret = await bcrypt.hash(data.secret, 10);
-        return this.prisma.user.update({
+        return this.prisma.agency.update({
             data,
             where
         });
     }
 
-    async delete(where: UserWhereUniqueInput): Promise<User> {
-        return this.prisma.user.delete({
+    async delete(where: AgencyWhereUniqueInput): Promise<Agency> {
+        return this.prisma.agency.delete({
             where,
         });
     }
-
-    async getByEmail(email: string): Promise<User> {
-        const getByEmail = await this.prisma.user.findOne({
-            where: { email },
-        })
-        return getByEmail
-    }
-
 
     /**
      * @param unique Recebe os campos unique do usuário
@@ -114,18 +82,16 @@ export class AgencyService {
      * @description Este método verifica de acordo com os parâmetros, a existência desses usuários
      * @returns Retorna um array de todos os usuários que estão nesta condição
      * */
-    async getByUserWhereUniqueInput(unique: UserWhereUniqueInput, compareNullValues = false): Promise<UserWhereUniqueInput[]> {
-        const { email, cpf, nickname } = unique
-        const select = 'SELECT * FROM public."User"'
+    async getByAgencyWhereUniqueInput(unique: AgencyWhereUniqueInput): Promise<AgencyWhereUniqueInput[]> {
+        const { registrofederal, site } = unique
+        const select = 'SELECT * FROM public."Agency"'
 
-        const andNotNicknameIsNull = compareNullValues ? 'AND NOT nickname ISNULL' : ''
-
-        const condition = `cpf = '${cpf}' OR email = '${email}' OR (nickname = '${nickname}' ${andNotNicknameIsNull})`
-        const getByUserWhereUniqueInput = await this.prisma.$queryRaw(`${select} WHERE ${condition};`)
-        console.log(`Query existsUser`)
+        const condition = `registrofederal = '${registrofederal}' OR site = '${site}'`
+        const getByAgencyWhereUniqueInput = await this.prisma.$queryRaw(`${select} WHERE ${condition};`)
+        console.log(`Query existsAgency`)
         console.dir(`${select} WHERE ${condition};`)
 
-        return getByUserWhereUniqueInput
+        return getByAgencyWhereUniqueInput
     }
 
 }

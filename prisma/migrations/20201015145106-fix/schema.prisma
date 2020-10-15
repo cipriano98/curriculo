@@ -2,7 +2,7 @@
 // & https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-schema/relations
 datasource db {
     provider = "postgresql"
-    url      = env("DATABASE_URL")
+    url = "***"
 }
 
 generator client {
@@ -82,7 +82,6 @@ model Company {
     registrofederal String  @unique
     site            String?  @unique
     links           String[]
-    labellinks      String[]
     ativo           Boolean @default(true)
     role            Role    @default(EMPLOYER)
 
@@ -96,7 +95,6 @@ model Agency {
     registrofederal String  @unique
     site            String  @unique
     links           String[]
-    labellinks      String[]
     ativo           Boolean @default(true)
     role            Role    @default(VACANCYDISTRIBUTOR)
 
