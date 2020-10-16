@@ -2,7 +2,7 @@
 // & https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-schema/relations
 datasource db {
     provider = "postgresql"
-    url      = env("DATABASE_URL")
+    url = "***"
 }
 
 generator client {
@@ -36,10 +36,10 @@ model User {
     preferencialname String?
     gender           Gender
 
-    Profile    Profile
+    Profile    Profile?
     Address    Address[]
     Contact    Contact[]
-    Curriculum Curriculum
+    Curriculum Curriculum?
 
     createdat DateTime @default(now())
     updatedat DateTime @updatedAt

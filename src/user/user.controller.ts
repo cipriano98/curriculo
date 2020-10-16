@@ -1,6 +1,6 @@
 import { Controller, Response, Get, Param, Post, Body, Put, Delete, HttpCode, Query } from '@nestjs/common';
 import { UserService } from './user.service';
-import { User as UserModel, UserWhereUniqueInput } from '@prisma/client';
+import { User as UserModel } from '@prisma/client';
 
 @Controller('user')
 export class UserController {
@@ -25,7 +25,7 @@ export class UserController {
 
     @Get('/:id')
     @HttpCode(200)
-    async getOne(@Param('id') id: UserWhereUniqueInput): Promise<UserModel> {
+    async getOne(@Param('id') id): Promise<UserModel> {
         return this.userService.getOne(id)
     }
 

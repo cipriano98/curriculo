@@ -14,8 +14,8 @@ export class HealthController {
     healthCheck() {
         const port = process.env.PORT || 3333
         return this.health.check([
-            async () =>  await this.dns.pingCheck(process.env.npm_package_NAME, `http://localhost:${port}/api/v1/health/status`),
-            async () => this.dns.pingCheck('zeta-analise', `http://zeta08.primusweb.com.br:${3017}/api/v1/health`),
+            () => this.dns.pingCheck(process.env.npm_package_NAME, `http://localhost:${port}/api/v1/health/status`),
+            () => this.dns.pingCheck('zeta-analise', `http://zeta08.primusweb.com.br:${3017}/api/v1/health`),
         ])
     }
     

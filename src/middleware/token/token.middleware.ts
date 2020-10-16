@@ -1,22 +1,34 @@
 import { Injectable, NestMiddleware, Next, Req, Res } from '@nestjs/common';
-const jwt = require('jsonwebtoken')
+import jwt = require('jsonwebtoken')
 
 const dataUTC = new Date().getUTCFullYear() + '/' + (new Date().getUTCMonth() + 1) + '/' + new Date().getUTCDate();
 const horaUTC = new Date().getUTCHours() + ':' + new Date().getUTCMinutes() + ':' + new Date().getUTCSeconds() + ' UTC';
 @Injectable()
 export class TokenMiddleware implements NestMiddleware {
+    public token: any
+
+    constructor() {
+        this.use
+    }
 
     use(@Req() req, @Res() res, @Next() next) {
 
         const authorizedLog = logedIn => {
-            console.log('\nAcesso permitido ao usuário', logedIn.name)
-            console.log("by temAcesso")
-
             console.log("\n")
+            console.log(`User: ${logedIn.name} | Role: ${logedIn.role}`)
+            console.log(`request: ${req.path} → Type: ${req.method}`);
+            console.log(`in: ${req.headers.host}`);
+            console.log("on:", dataUTC, 'at', horaUTC);
+            console.log("by AuthMiddleware\n");
+        }
+
+        const unauthorizedLog = () => {
+            console.log("\n")
+            console.log("Unauthorized");
             console.log("request:", req.path, "→ Type:", req.method);
             console.log("in:", req.headers.referer);
             console.log("on:", dataUTC, 'at', horaUTC);
-            console.log("by AuthMiddleware\n");
+            console.log("by TokenMiddleware\n");
         }
 
         const hasAccess = logedIn => {
@@ -31,14 +43,6 @@ export class TokenMiddleware implements NestMiddleware {
             console.log("request:", req.path, "→ Type:", req.method);
             console.log("by temAcesso");
             return false
-        }
-
-        const unauthorizedLog = () => {
-            console.log("\nUnauthorized");
-            console.log("request:", req.path, "→ Type:", req.method);
-            console.log("in:", req.headers.referer);
-            console.log("on:", dataUTC, 'at', horaUTC);
-            console.log("by TokenMiddleware\n");
         }
 
         const token = req.headers["x-access-token"];

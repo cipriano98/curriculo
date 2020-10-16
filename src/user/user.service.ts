@@ -46,10 +46,18 @@ export class UserService {
             data.secret = await bcrypt.hash(data.secret, 10);
             const existsUser = await this.getByUserWhereUniqueInput(data, true)
             // existsUser.find(user => user.cpf === data.cpf);
-            console.log(`existsUser: ${existsUser.length ? true : false}`)
             if (!existsUser.length) {
                 // const {  } = data
-                return await this.prisma.user.create({ data })
+                return await this.prisma.user.create(
+                    {
+                        data,
+                        include: {
+                            Address: true,
+                            Contact: true,
+                            Curriculum: true,
+                            Profile: true
+                        }
+                    })
             }
 
             // existsUser.some(element => {
@@ -61,7 +69,7 @@ export class UserService {
                 error: 'Chave única duplicada'
             }
         } catch (error) {
-            return error.message
+            throw new HttpException("Campos incorretos recebidos", HttpStatus.NOT_ACCEPTABLE)
         }
     }
 
@@ -87,10 +95,16 @@ export class UserService {
         where: UserWhereUniqueInput;
     }): Promise<User> {
         const { where, data } = params;
-        if(data.secret) data.secret = await bcrypt.hash(data.secret, 10);
+        if (data.secret) data.secret = await bcrypt.hash(data.secret, 10);
         return this.prisma.user.update({
             data,
-            where
+            where,
+            include: {
+                Address: true,
+                Contact: true,
+                Curriculum: true,
+                Profile: true
+            }
         });
     }
 

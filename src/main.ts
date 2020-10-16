@@ -1,5 +1,15 @@
 import { Server } from './server'
+new Server()
 
+// class Main {
+//     constructor( ) { 
+//         this.initServer()
+//     }
 
-const server = new Server()
-server.bootstrap()
+//     private initServer(){
+//         return new Server()
+//     }
+
+// }
+
+// new Main()

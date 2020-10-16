@@ -1,10 +1,10 @@
-import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common'
+import { Body, Controller, Post, Res } from '@nestjs/common'
 import { UserService } from '../user/user.service'
-
 import { User } from '@prisma/client'
-const jwt = require('jsonwebtoken')
 
-const bcrypt = require('bcrypt')
+import jwt = require('jsonwebtoken')
+
+import bcrypt = require('bcrypt')
 
 @Controller('user')
 export class AuthController {
@@ -18,8 +18,6 @@ export class AuthController {
     public async signup(@Res() res, @Body() data): Promise<User> {
         // data.secret = bcrypt.hashSync(data.secret, 10);
         const newUser = await this.userService.create(data)
-        console.log('newUser:')
-        console.dir(newUser)
 
         if (newUser.hasOwnProperty('id')) return res.status(201).json({
             id: newUser['id'],
@@ -31,15 +29,11 @@ export class AuthController {
             nickname: newUser['nickname'],
         })
         return res.status(400).json(newUser)
-        // const userCreated = await this.userService.create(data)
-        // if
-        // return res.status(201).send({ id: userCreated.id, email: userCreated.email });
     }
 
 
     @Post('/signin')
     public async signin(@Res() res, @Body() data): Promise<any> {
-        console.dir(data)
         if (data.email === '' || data.secret === '') {
             return res.status(400).json({ auth: false, message: 'Os campos devem ser preenchidos corretamente' });
         }
@@ -47,11 +41,8 @@ export class AuthController {
         try {
 
             const existsUser = await this.userService.getByEmail(data.email);
-            console.dir(existsUser)
-
             if (existsUser?.email != null) {
                 const userLoggedIn = await bcrypt.compare(data.secret, existsUser.secret);
-                console.dir(userLoggedIn)
                 if (userLoggedIn) {
                     const secret = process.env.SERVER_SECRET_TOKEN || 'Currículo→Único';
                     const token = jwt.sign({
