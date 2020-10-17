@@ -2,7 +2,7 @@
 // & https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-schema/relations
 datasource db {
     provider = "postgresql"
-    url      = env("DATABASE_URL")
+    url = "***"
 }
 
 generator client {
@@ -27,18 +27,19 @@ model User {
 
     fullname         String
     secret           String?
-    ativo            Boolean @default(true)
+    active           Boolean @default(true)
     email            String  @unique
     cpf              String  @unique
     role             Role    @default(CANDIDATE)
     datebirth        String?
     nickname         String? @unique
     preferencialname String?
+    gender           Gender
 
-    Profile    Profile?
+    Profile    Profile
     Address    Address[]
     Contact    Contact[]
-    Curriculum Curriculum?
+    Curriculum Curriculum
 
     createdat DateTime @default(now())
     updatedat DateTime @updatedAt
@@ -64,6 +65,9 @@ model Contact {
     User   User   @relation(fields: [userid], references: [id])
     userid Int
 
+    talkto String @default("me")
+    phone String @default("")
+
     createdat DateTime @default(now())
     updatedat DateTime @updatedAt
 
@@ -73,32 +77,50 @@ model Curriculum {
     id     String @id @default(uuid())
     User   User   @relation(fields: [userid], references: [id])
     userid Int
-}
 
-enum Role {
-    CANDIDATE
-    EMPLOYER
-    ADMIN
+    professionalprofile String
+
+    createdat DateTime @default(now())
+    updatedat DateTime @updatedAt
 }
 
 model Company {
-    id              String  @id @default(uuid())
+    id              String   @id @default(uuid())
     name            String
-    registrofederal String
-    ativo           Boolean @default(false)
-    role            Role    @default(EMPLOYER)
+    registrofederal String   @unique
+    site            String?  @unique
+    links           String[]
+    labellinks      String[]
+    active          Boolean  @default(true)
+    role            Role     @default(EMPLOYER)
 
     createdat DateTime @default(now())
     updatedat DateTime @updatedAt
 }
 
 model Agency {
-    id              String  @id @default(uuid())
+    id              String   @id @default(uuid())
     name            String
-    registrofederal String
-    ativo           Boolean @default(false)
-    role            Role    @default(EMPLOYER)
+    registrofederal String   @unique
+    site            String   @unique
+    links           String[]
+    labellinks      String[]
+    active          Boolean  @default(true)
+    role            Role     @default(VACANCYDISTRIBUTOR)
 
     createdat DateTime @default(now())
     updatedat DateTime @updatedAt
+}
+
+enum Gender {
+    MASCULINO
+    FEMININO
+    OUTRO
+}
+
+enum Role {
+    CANDIDATE
+    EMPLOYER
+    ADMIN
+    VACANCYDISTRIBUTOR
 }

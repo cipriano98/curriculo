@@ -2,7 +2,7 @@
 // & https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-schema/relations
 datasource db {
     provider = "postgresql"
-    url      = env("DATABASE_URL")
+    url = "***"
 }
 
 generator client {
@@ -51,7 +51,7 @@ model Address {
     logradouro String
     bairro     String
     cidade     String
-    state      String? @default("RS")
+    uf         String
     cep        String
 
     createdat DateTime @default(now())
@@ -66,7 +66,7 @@ model Contact {
     userid Int
 
     talkto String @default("me")
-    phone  String
+    phone String
 
     createdat DateTime @default(now())
     updatedat DateTime @updatedAt

@@ -3,9 +3,9 @@ import { PrismaService } from '@prisma/prisma.service';
 import { BadRequest } from '@interfaces/badRequest.interface';
 import {
     UserUpdateInput, User, UserCreateInput, UserWhereUniqueInput,
-    ProfileCreateOneWithoutUserInput,
     UserWhereInput,
     UserOrderByInput,
+    UserSelect,
 } from '@prisma/client';
 import * as bcrypt from 'bcrypt'
 
@@ -42,14 +42,14 @@ export class UserService {
     }
 
     async create(data: UserCreateInput): Promise<User | BadRequest | null> {
+        const { email, cpf, nickname } = data
+        const unique = { email, cpf, nickname }
         try {
             data.secret = await bcrypt.hash(data.secret, 10);
-            const existsUser = await this.getByUserWhereUniqueInput(data, true)
-            // existsUser.find(user => user.cpf === data.cpf);
+            const existsUser = await this.getByUnique(unique, true)
+
             if (!existsUser.length) {
-                // const {  } = data
-                return await this.prisma.user.create(
-                    {
+                const newUser = await this.prisma.user.create({
                         data,
                         include: {
                             Address: true,
@@ -58,22 +58,39 @@ export class UserService {
                             Profile: true
                         }
                     })
+                    delete newUser.secret
+                return newUser
             }
 
-            // existsUser.some(element => {
-            //     console.dir(element)
-            // })
+            const badRequestMessage = () => {
+                let message = {};
+                existsUser.some(user => {
+                    if (user.email === email) {
+                        message["email"] = "Já existe e deve ser único"
+                    }
+                    if (user.cpf === cpf) {
+                        message["cpf"] = "Já existe e deve ser único"
+                    }
+                    if (user.nickname === nickname) {
+                        message["nickname"] = "Já existe e deve ser único"
+                    }
+                })
+                return message
+            }
 
             return {
-                message: 'email, cpf, nickname devem ser únicos',
-                error: 'Chave única duplicada'
+                message: badRequestMessage() || "Chave única duplicada",
+                error: "Chave única duplicada"
             }
+
+
         } catch (error) {
-            throw new HttpException("Campos incorretos recebidos", HttpStatus.NOT_ACCEPTABLE)
+            console.dir(error)
+            throw new HttpException("Dados incorretos fornecidos", HttpStatus.NOT_ACCEPTABLE)
         }
     }
 
-    public async sigin(email: string, hashedPassword: string) {
+    public async signin(email: string, hashedPassword: string) {
         try {
             const user = await this.getByEmail(email);
             const isPasswordMatching = await bcrypt.compare(
@@ -81,12 +98,12 @@ export class UserService {
                 user.secret
             );
             if (!isPasswordMatching) {
-                throw new HttpException('Wrong credentials provided', HttpStatus.BAD_REQUEST);
+                throw new HttpException('Credenciais incorretas fornecidas', HttpStatus.BAD_REQUEST);
             }
             user.secret = undefined;
             return user;
         } catch (error) {
-            throw new HttpException('Wrong credentials provided', HttpStatus.BAD_REQUEST);
+            throw new HttpException('Credenciais incorretas fornecidas', HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -121,21 +138,21 @@ export class UserService {
         return getByEmail
     }
 
-
     /**
      * @param unique Recebe os campos unique do usuário
      * @param compareNullValues Recebe uma condição para pesquisa que compara ou não valores nulos `default: false`
      * @description Este método verifica de acordo com os parâmetros, a existência desses usuários
      * @returns Retorna um array de todos os usuários que estão nesta condição
      * */
-    async getByUserWhereUniqueInput(unique: UserWhereUniqueInput, compareNullValues = false): Promise<UserWhereUniqueInput[]> {
+    async getByUnique(unique: UserWhereUniqueInput, compareNullValues = false): Promise<UserWhereUniqueInput[]> {
         const { email, cpf, nickname } = unique
-        const select = 'SELECT * FROM public."User"'
+        const select = 'SELECT email, cpf, nickname FROM public."User"'
 
         const andNotNicknameIsNull = compareNullValues ? 'AND NOT nickname ISNULL' : ''
 
         const condition = `cpf = '${cpf}' OR email = '${email}' OR (nickname = '${nickname}' ${andNotNicknameIsNull})`
         const getByUserWhereUniqueInput = await this.prisma.$queryRaw(`${select} WHERE ${condition};`)
+
         console.log(`Query existsUser`)
         console.dir(`${select} WHERE ${condition};`)
 

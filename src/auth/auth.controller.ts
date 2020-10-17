@@ -19,15 +19,7 @@ export class AuthController {
         // data.secret = bcrypt.hashSync(data.secret, 10);
         const newUser = await this.userService.create(data)
 
-        if (newUser.hasOwnProperty('id')) return res.status(201).json({
-            id: newUser['id'],
-            fullname: newUser['fullname'],
-            email: newUser['email'],
-            cpf: newUser['cpf'],
-            role: newUser['role'],
-            datebirth: newUser['datebirth'],
-            nickname: newUser['nickname'],
-        })
+        if (newUser.hasOwnProperty('id')) return res.status(201).json({ newUser })
         return res.status(400).json(newUser)
     }
 
@@ -42,8 +34,8 @@ export class AuthController {
 
             const existsUser = await this.userService.getByEmail(data.email);
             if (existsUser?.email != null) {
-                const userLoggedIn = await bcrypt.compare(data.secret, existsUser.secret);
-                if (userLoggedIn) {
+                if (await bcrypt.compare(data.secret, existsUser.secret)) {
+                    delete existsUser.secret
                     const secret = process.env.SERVER_SECRET_TOKEN || 'Currículo→Único';
                     const token = jwt.sign({
                         id: existsUser.id,

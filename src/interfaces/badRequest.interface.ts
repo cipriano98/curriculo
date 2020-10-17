@@ -5,7 +5,7 @@ export interface BadRequest {
     /**
      * message
      */
-    message?: string
+    message?: string | Function | {}
     /**
      * error
      */
