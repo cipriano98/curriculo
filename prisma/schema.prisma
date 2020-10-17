@@ -1,5 +1,5 @@
 // https://www.meucurriculoperfeito.com.br/criar-curriculo/section/cntc
-// & https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-schema/relations
+
 datasource db {
     provider = "postgresql"
     url      = env("DATABASE_URL")
