@@ -1,1 +1,1 @@
-web: yarn init-app
+worker: yarn init-app
