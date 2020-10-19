@@ -11,7 +11,7 @@ export class UserController {
 
     @Post('/')
     @HttpCode(201)
-    async signup(@Response() res, @Body() userData): Promise<UserModel> {
+    async signUp(@Response() res, @Body() userData): Promise<UserModel> {
         const newUser = await this.userService.create(userData)
         if (newUser.hasOwnProperty('id')) return res.status(201).json(newUser)
         return res.status(400).json(newUser)

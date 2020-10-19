@@ -1,5 +1,12 @@
 {
-  "watch": ["src"],
-  "ext": "ts, js",
-  "exec": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/main.ts --ignore tests"
+    "watch": [
+        "src"
+    ],
+    "ext": "ts, js",
+    "exec": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/main.ts --ignore tests",
+    "ignore": [
+        "**/*.test.ts",
+        "**/*.spec.ts",
+        "node_modules"
+      ]
 }

@@ -15,7 +15,7 @@ export class AuthController {
 
 
     @Post('/signup')
-    public async signup(@Res() res, @Body() data): Promise<User> {
+    public async signUp(@Res() res, @Body() data): Promise<User> {
         // data.secret = bcrypt.hashSync(data.secret, 10);
         const newUser = await this.userService.create(data)
 
@@ -25,7 +25,7 @@ export class AuthController {
 
 
     @Post('/signin')
-    public async signin(@Res() res, @Body() data): Promise<any> {
+    public async signIn(@Res() res, @Body() data): Promise<any> {
         if (data.email === '' || data.secret === '') {
             return res.status(400).json({ auth: false, message: 'Os campos devem ser preenchidos corretamente' });
         }

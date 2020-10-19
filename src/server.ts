@@ -3,15 +3,17 @@ import { AppModule } from './app.module';
 import { UnlessMiddleware } from './middleware/router/unless.middleware';
 import { TokenMiddleware } from './middleware/token/token.middleware';
 import chalk = require('chalk')
+
 /**
  * Prefixo global
  */
 export const globalPrefix = '/api/v1'
 
 /**
- * Token iddleware
+ * Token middleware
  */
 const tokenMiddleware = new TokenMiddleware().use
+
 /**
  * Unless middleware
  */

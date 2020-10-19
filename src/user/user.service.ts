@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { PrismaService } from '@prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { BadRequest } from '@interfaces/badRequest.interface';
 import {
     UserUpdateInput, User, UserCreateInput, UserWhereUniqueInput,
@@ -13,7 +13,7 @@ import * as bcrypt from 'bcrypt'
 export class UserService {
     constructor(
         private readonly prisma: PrismaService,
-        private readonly utils: PrismaService,
+        // private readonly utils: UtilService,
     ) { }
 
     async getOne(id): Promise<User | null> {
@@ -63,7 +63,7 @@ export class UserService {
             }
 
             const badRequestMessage = () => {
-                let message = {};
+                const message = {};
                 existsUser.some(user => {
                     if (user.email === email) {
                         message["email"] = "Já existe e deve ser único"
@@ -90,7 +90,7 @@ export class UserService {
         }
     }
 
-    public async signin(email: string, hashedPassword: string) {
+    public async signIn(email: string, hashedPassword: string) {
         try {
             const user = await this.getByEmail(email);
             const isPasswordMatching = await bcrypt.compare(
