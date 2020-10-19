@@ -3,7 +3,7 @@
     "version": "0.0.6",
     "description": "Com um único cadastro seu currículo está em todas as plataformas",
     "author": {
-        "name":  "Natan Cipriano",
+        "name": "Natan Cipriano",
         "email": "natancipriano98@gmail.com"
     },
     "main": "dist/main.js",
@@ -22,6 +22,7 @@
         "start": "nest start",
         "serve": "nest build && nest start",
         "ts-dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/main.ts --ignore tests",
+        "dev": "nodemon",
         "hot": "nest build --webpack --webpackPath hot-reload.config.js",
         "doc": "compodoc -p tsconfig.json -s -w --language pt-BR --theme stripe -n \"Currículo Único Documentation\" -o --port 3030",
         "debug": "nest build && nest start --debug --watch",
