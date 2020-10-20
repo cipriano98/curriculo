@@ -54,15 +54,6 @@ export class Server {
 
         const server = await app.listen(process.env.PORT || 3333, '0.0.0.0', () => {
             console.clear()
-            console.log(chalk.bold(`
-                 ######  ##     ## ########  ########  ####  ######  ##     ## ##        #######     ##     ## ##    ## ####  ######   #######  
-                ##    ## ##     ## ##     ## ##     ##  ##  ##    ## ##     ## ##       ##     ##    ##     ## ###   ##  ##  ##    ## ##     ## 
-                ##       ##     ## ##     ## ##     ##  ##  ##       ##     ## ##       ##     ##    ##     ## ####  ##  ##  ##       ##     ## 
-                ##       ##     ## ########  ########   ##  ##       ##     ## ##       ##     ##    ##     ## ## ## ##  ##  ##       ##     ## 
-                ##       ##     ## ##   ##   ##   ##    ##  ##       ##     ## ##       ##     ##    ##     ## ##  ####  ##  ##       ##     ## 
-                ##    ## ##     ## ##    ##  ##    ##   ##  ##    ## ##     ## ##       ##     ##    ##     ## ##   ###  ##  ##    ## ##     ## 
-                 ######   #######  ##     ## ##     ## ####  ######   #######  ########  #######      #######  ##    ## ####  ######   #######
-            `))
             console.log(`\n[${chalk.bold.hex('#28f000')(process.env.npm_package_NAME.toUpperCase())}] is running in ${chalk.blue.underline(`http://localhost:${server.address().port + globalPrefix}`)}`)
             console.log(process.env.npm_package_DESCRIPTION)
             console.log(`${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}\n`);
