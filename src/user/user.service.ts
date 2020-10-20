@@ -1,6 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { BadRequest } from '@interfaces/badRequest.interface';
 import {
     UserUpdateInput, User, UserCreateInput, UserWhereUniqueInput,
     UserWhereInput,
@@ -8,6 +7,7 @@ import {
     UserSelect,
 } from '@prisma/client';
 import * as bcrypt from 'bcrypt'
+import { BadRequest } from 'src/interfaces/badRequest.interface';
 
 @Injectable()
 export class UserService {

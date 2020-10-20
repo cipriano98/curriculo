@@ -4,8 +4,9 @@ import { PrismaService } from '../prisma/prisma.service';
 
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
-import { UserValidator } from '@utils/validator/user.validate';
+
 import { AuthController } from 'src/auth/auth.controller';
+import { UserValidator } from 'src/utils/validator/user.validate';
 
 @Module({
     imports: [],

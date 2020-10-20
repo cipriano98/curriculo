@@ -1,11 +1,11 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { BadRequest } from '@interfaces/badRequest.interface';
 import {
     AgencyUpdateInput, Agency, AgencyCreateInput, AgencyWhereUniqueInput,
     AgencyWhereInput,
     AgencyOrderByInput,
 } from '@prisma/client';
+import { BadRequest } from 'src/interfaces/badRequest.interface';
 
 @Injectable()
 export class AgencyService {
