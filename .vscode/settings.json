@@ -10,5 +10,9 @@
         "*.gateway.ts":"nest-gateway",
         "*.decorator.ts":"nest-decorator",
         "*.guard.ts":"nest-guard"
-    }
+    },
+    "cSpell.ignoreWords": [
+        "curriculo",
+        "unico"
+    ]
 }
