@@ -18,7 +18,7 @@
 
 
 <h3>
-    My new Description app
+    Com um único cadastro seu currículo está em todas as plataformas
 </h3>
 <hr  width="50%">
 <br>
