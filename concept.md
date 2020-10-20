@@ -43,8 +43,8 @@ Currículo Único - NestJS + prisma + Postgres
 
 ## Conceito A:
 
- - #### [&cross;] Aplicação completa, realizando todas as funcionalidades do conceito B com regras de negócio aplicadas corretamente;
+ - #### &cross; Aplicação completa, realizando todas as funcionalidades do conceito B com regras de negócio aplicadas corretamente;
 
 - [ ] Tratamento de erros, regras de negócio e exceções;
 
-- [ ] Implantar os Web Services em um servidor na nuvem: Heroku, Digital Ocean, etc.
+- [x] Implantar os Web Services em um servidor na nuvem: Heroku, Digital Ocean, etc.
