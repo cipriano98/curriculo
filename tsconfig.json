@@ -23,11 +23,11 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "paths": {
-      "@utils/*": ["./src/utils/*"],
-      "@config/*": ["./src/config/*"],
-      "@interfaces/*": ["./src/interfaces/*"]
-    }
+    // "paths": {
+    //   "@utils/*": ["./src/utils/*"],
+    //   "@config/*": ["./src/config/*"],
+    //   "@interfaces/*": ["./src/interfaces/*"]
+    // }
   },
   "include": [
     "src/**/*"
