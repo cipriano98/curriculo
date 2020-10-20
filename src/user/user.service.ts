@@ -7,7 +7,7 @@ import {
     UserSelect,
 } from '@prisma/client';
 import * as bcrypt from 'bcrypt'
-import { BadRequest } from 'src/interfaces/badRequest.interface';
+import { BadRequest } from '../interfaces/badRequest.interface';
 
 @Injectable()
 export class UserService {

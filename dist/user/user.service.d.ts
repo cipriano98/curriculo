@@ -1,6 +1,6 @@
 import { PrismaService } from '../prisma/prisma.service';
 import { UserUpdateInput, User, UserCreateInput, UserWhereUniqueInput } from '@prisma/client';
-import { BadRequest } from 'src/interfaces/badRequest.interface';
+import { BadRequest } from '../interfaces/badRequest.interface';
 export declare class UserService {
     private readonly prisma;
     constructor(prisma: PrismaService);

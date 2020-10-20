@@ -59,6 +59,8 @@
         "passport-jwt": "^4.0.0",
         "passport-local": "^1.0.0",
         "reflect-metadata": "^0.1.13",
+        "ts-node": "9.0.0",
+        "ts-node-dev": "^1.0.0-pre.63",
         "rimraf": "^3.0.2",
         "rxjs": "^6.5.4"
     },
@@ -88,8 +90,6 @@
         "supertest": "^4.0.2",
         "ts-jest": "26.2.0",
         "ts-loader": "^6.2.1",
-        "ts-node": "9.0.0",
-        "ts-node-dev": "^1.0.0-pre.63",
         "tsconfig-paths": "^3.9.0",
         "typescript": "^3.7.4",
         "webpack-node-externals": "^2.5.2"

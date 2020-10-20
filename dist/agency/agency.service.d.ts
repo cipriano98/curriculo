@@ -1,6 +1,6 @@
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { AgencyUpdateInput, Agency, AgencyCreateInput, AgencyWhereUniqueInput } from '@prisma/client';
-import { BadRequest } from 'src/interfaces/badRequest.interface';
+import { BadRequest } from '../interfaces/badRequest.interface';
 export declare class AgencyService {
     private readonly prisma;
     private readonly utils;
