@@ -1,6 +1,6 @@
 {
     "name": "curriculo-unico",
-    "version": "0.0.6",
+    "version": "0.01.0",
     "description": "Com um único cadastro seu currículo está em todas as plataformas",
     "author": {
         "name": "Natan Cipriano",
@@ -18,8 +18,8 @@
         "rm-nm": "rimraf node_modules",
         "rm": "rimraf",
         "rm-dnm": "yarn rm-dist && yarn rm-nm",
-        "build": "nest build",
-        "start": "nest start",
+        "build": "tsc",
+        "start": "node dist/main.js",
         "serve": "nest build && nest start",
         "ts-dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/main.ts --ignore tests",
         "dev": "nodemon",
