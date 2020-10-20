@@ -19,7 +19,7 @@
         "rm": "rimraf",
         "rm-dnm": "yarn rm-dist && yarn rm-nm",
         "build": "tsc",
-        "start": "yarn install && node dist/main.js",
+        "start": "node dist/main.js",
         "serve": "nest build && nest start",
         "ts-dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/main.ts --ignore tests",
         "dev": "nodemon",
