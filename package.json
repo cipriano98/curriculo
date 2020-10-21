@@ -33,12 +33,12 @@
         "test:cov": "jest --coverage",
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
         "test:e2e": "jest --config ./test/jest-e2e.json",
-        "save": "prisma migrate save --create-db --experimental",
+        "save": "prisma migrate save --create-db -n up --experimental",
         "up": "prisma migrate up --experimental --verbose",
         "generate": "prisma generate",
         "studio": "prisma studio",
         "prisma": "yarn save && yarn up && yarn generate",
-        "init-app": "yarn prisma && yarn serve",
+        "init-app": "tsc && yarn start",
         "renew-app": "yarn rm-dnm && yarn init-app"
     },
     "dependencies": {
