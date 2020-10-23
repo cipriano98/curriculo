@@ -23,7 +23,7 @@ export class HealthController {
     @HttpCode(HttpStatus.OK)
     status() {
         return {
-            server: process.env.npm_package_NAME,
+            server: process.env.SERVER_NAME,
             up: true
         }
     }
