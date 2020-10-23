@@ -5,7 +5,6 @@ const core_1 = require("@nestjs/core");
 const app_module_1 = require("./app.module");
 const unless_middleware_1 = require("./middleware/router/unless.middleware");
 const token_middleware_1 = require("./middleware/token/token.middleware");
-const chalk = require("chalk");
 exports.globalPrefix = '/api/v1';
 const tokenMiddleware = new token_middleware_1.TokenMiddleware().use;
 const unlessMiddleware = new unless_middleware_1.UnlessMiddleware().use;
@@ -19,7 +18,6 @@ class Server {
         app.use(unlessMiddleware(tokenMiddleware, `${exports.globalPrefix}/user/signin`, `${exports.globalPrefix}/health/status`));
         const server = await app.listen(process.env.PORT || 3000, '0.0.0.0', () => {
             console.clear();
-            console.log(`\n[${chalk.bold.hex('#28f000')(process.env.npm_package_NAME)}] is running in ${chalk.blue.underline(`http://localhost:${server.address().port + exports.globalPrefix}`)}`);
             console.log(process.env.npm_package_DESCRIPTION);
             console.log(`${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}\n`);
         });
