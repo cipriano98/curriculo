@@ -1,8 +1,8 @@
 examples
 # compiled output
 # /dist
-node_modules
-!node_modules/.prisma
+/node_modules/*
+!/node_modules/.prisma\client
 
 # dotenv environment variables file
 .env

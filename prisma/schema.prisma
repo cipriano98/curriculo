@@ -1,126 +1,112 @@
-// https://www.meucurriculoperfeito.com.br/criar-curriculo/section/cntc
-
-datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+generator client {
+  provider = "prisma-client-js"
 }
 
-generator client {
-    provider = "prisma-client-js"
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Profile {
-    id        String  @id @default(uuid())
-    bio       String?
-    pseudonym String?
-    User      User    @relation(fields: [userId], references: [id])
-    userId    Int     @unique
-
-    createdat DateTime @default(now())
-    updatedat DateTime @updatedAt
+  id        String   @id @default(uuid())
+  bio       String?
+  pseudonym String?
+  userId    Int      @unique
+  createdat DateTime @default(now())
+  updatedat DateTime @updatedAt
+  User      User     @relation(fields: [userId], references: [id])
 }
 
 model User {
-    id                Int    @id @default(autoincrement())
-    authenticationkey String @default(uuid())
-    securitykey       String @default(uuid())
-
-    fullname         String
-    secret           String?
-    active           Boolean @default(true)
-    email            String  @unique
-    cpf              String  @unique
-    role             Role    @default(CANDIDATE)
-    datebirth        String?
-    nickname         String? @unique
-    preferencialname String?
-    gender           Gender
-
-    Profile    Profile
-    Address    Address[]
-    Contact    Contact[]
-    Curriculum Curriculum
-
-    createdat DateTime @default(now())
-    updatedat DateTime @updatedAt
+  id                Int         @id @default(autoincrement())
+  authenticationkey String      @default(uuid())
+  securitykey       String      @default(uuid())
+  fullname          String
+  secret            String?
+  email             String      @unique
+  cpf               String      @unique
+  role              Role        @default(CANDIDATE)
+  datebirth         String?
+  nickname          String?     @unique
+  preferencialname  String?
+  createdat         DateTime    @default(now())
+  updatedat         DateTime    @updatedAt
+  gender            Gender
+  active            Boolean     @default(true)
+  Address           Address[]
+  Contact           Contact[]
+  Curriculum        Curriculum?
+  Profile           Profile?
 }
 
 model Address {
-    id         String @id @default(uuid())
-    name       String
-    logradouro String
-    bairro     String
-    cidade     String
-    state      String? @default("RS")
-    cep        String
-
-    createdat DateTime @default(now())
-    updatedat DateTime @updatedAt
-    User      User     @relation(fields: [userid], references: [id])
-    userid    Int
+  id         String   @id @default(uuid())
+  name       String
+  logradouro String
+  bairro     String
+  cidade     String
+  cep        String
+  createdat  DateTime @default(now())
+  updatedat  DateTime @updatedAt
+  userid     Int
+  state      String?  @default("RS")
+  User       User     @relation(fields: [userid], references: [id])
 }
 
 model Contact {
-    id     String @id @default(uuid())
-    User   User   @relation(fields: [userid], references: [id])
-    userid Int
-
-    talkto String @default("me")
-    phone  String
-
-    createdat DateTime @default(now())
-    updatedat DateTime @updatedAt
-
+  id        String   @id @default(uuid())
+  userid    Int
+  createdat DateTime @default(now())
+  updatedat DateTime @updatedAt
+  talkto    String   @default("me")
+  phone     String
+  User      User     @relation(fields: [userid], references: [id])
 }
 
 model Curriculum {
-    id     String @id @default(uuid())
-    User   User   @relation(fields: [userid], references: [id])
-    userid Int
-
-    professionalprofile String
-
-    createdat DateTime @default(now())
-    updatedat DateTime @updatedAt
+  id                  String   @id @default(uuid())
+  userid              Int      @unique
+  professionalprofile String
+  createdat           DateTime @default(now())
+  updatedat           DateTime @updatedAt
+  User                User     @relation(fields: [userid], references: [id])
 }
 
 model Company {
-    id              String   @id @default(uuid())
-    name            String
-    registrofederal String   @unique
-    site            String?  @unique
-    links           String[]
-    labellinks      String[]
-    active          Boolean  @default(true)
-    role            Role     @default(EMPLOYER)
-
-    createdat DateTime @default(now())
-    updatedat DateTime @updatedAt
+  id              String   @id @default(uuid())
+  name            String
+  registrofederal String   @unique
+  role            Role     @default(EMPLOYER)
+  createdat       DateTime @default(now())
+  updatedat       DateTime @updatedAt
+  site            String?  @unique
+  links           String[]
+  labellinks      String[]
+  active          Boolean  @default(true)
 }
 
 model Agency {
-    id              String   @id @default(uuid())
-    name            String
-    registrofederal String   @unique
-    site            String   @unique
-    links           String[]
-    labellinks      String[]
-    active          Boolean  @default(true)
-    role            Role     @default(VACANCYDISTRIBUTOR)
-
-    createdat DateTime @default(now())
-    updatedat DateTime @updatedAt
+  id              String   @id @default(uuid())
+  name            String
+  registrofederal String   @unique
+  role            Role     @default(VACANCYDISTRIBUTOR)
+  createdat       DateTime @default(now())
+  updatedat       DateTime @updatedAt
+  site            String   @unique
+  links           String[]
+  labellinks      String[]
+  active          Boolean  @default(true)
 }
 
 enum Gender {
-    MASCULINO
-    FEMININO
-    OUTRO
+  FEMININO
+  MASCULINO
+  OUTRO
 }
 
 enum Role {
-    CANDIDATE
-    EMPLOYER
-    ADMIN
-    VACANCYDISTRIBUTOR
+  ADMIN
+  CANDIDATE
+  EMPLOYER
+  VACANCYDISTRIBUTOR
 }
