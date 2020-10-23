@@ -1,7 +1,7 @@
 # compiled output
 # /dist
-node_modules/*
-!node_modules/.prisma
+# node_modules/*
+# !node_modules/.prisma
 
 # dotenv environment variables file
 .env
@@ -46,4 +46,3 @@ lerna-debug.log*
 # !doc/images
 documentation/*
 !documentation/images/
-node_modules
