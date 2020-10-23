@@ -1,1 +1,2 @@
-worker: yarn init-app
+web: yarn start
+worker: yarn build
