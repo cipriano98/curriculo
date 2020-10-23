@@ -18,7 +18,7 @@
         "rm-nm": "rimraf node_modules",
         "rm": "rimraf",
         "rm-dnm": "yarn rm-dist && yarn rm-nm",
-        "build": "tsc",
+        "build": "tsc -p tsconfig.build.json",
         "start": "node dist/main.js",
         "serve": "nest build && nest start",
         "ts-dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/main.ts --ignore tests",
@@ -38,7 +38,7 @@
         "generate": "prisma generate",
         "studio": "prisma studio",
         "prisma": "yarn save && yarn up && yarn generate",
-        "init-app": "tsc && yarn start",
+        "init-app": "yarn && yarn build && yarn start",
         "renew-app": "yarn rm-dnm && yarn init-app"
     },
     "dependencies": {
@@ -49,7 +49,6 @@
         "@nestjs/passport": "^7.1.0",
         "@nestjs/platform-express": "^7.0.0",
         "@nestjs/terminus": "^7.0.1",
-        "@nestjsplus/redirect": "^1.0.0",
         "@prisma/client": "^2.9.0",
         "bcrypt": "^5.0.0",
         "class-transformer": "^0.3.1",
