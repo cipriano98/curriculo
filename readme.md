@@ -58,6 +58,8 @@
 
 ## Participants
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cd1bec5810474c9c8da4e4f9a37e5989)](https://app.codacy.com/gh/cipriano98/curriculo?utm_source=github.com&utm_medium=referral&utm_content=cipriano98/curriculo&utm_campaign=Badge_Grade)
+
 | [<img src="https://avatars2.githubusercontent.com/u/56701750?s=400&v=4" width="75px;"/>](https://github.com/cipriano98) |
 | :---------------------------------------------------------------------------------------------------------------------: |
 
