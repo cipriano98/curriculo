@@ -1,7 +1,9 @@
 import { NestFactory } from '@nestjs/core';
+
 import { AppModule } from './app.module';
 import { UnlessMiddleware } from './middleware/router/unless.middleware';
 import { TokenMiddleware } from './middleware/token/token.middleware';
+
 // import chalk = require('chalk')
 
 /**
@@ -41,7 +43,7 @@ export class Server {
     }
 
     async bootstrap() {
-        const app = await NestFactory.create(AppModule);
+        const app = await NestFactory.create(AppModule, { cors: true });
 
         app.setGlobalPrefix(globalPrefix);
 

@@ -1,4 +1,5 @@
 import { Server } from './server'
+
 new Server()
 
 // class Main {
