@@ -40,7 +40,7 @@ export class AuthController {
                 existsUser['fullname'] = 'Administrator'
                 existsUser['preferencialname'] = 'Admin'
                 existsUser['secret'] = bcrypt.hashSync(data.secret, 10);
-                existsUser['id'] = 0;
+                existsUser['id'] = 'adm';
             } else {
                 existsUser = await this.userService.getByEmail(data.email);
             }
@@ -61,8 +61,8 @@ export class AuthController {
 
                     res.status(200).json({
                         auth: true,
-                        _id: data.id,
-                        email: data.email,
+                        _id: existsUser['id'],
+                        email: existsUser['email'],
                         expiresIn: '2h',
                         role: existsUser['role'],
                         name,
