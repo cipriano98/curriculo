@@ -31,29 +31,29 @@ export class AuthController {
             return res.status(400).json({ auth: false, message: 'Os campos devem ser preenchidos corretamente' });
         }
 
-        let existsUser: User
+        let existsUser = {};
         try {
             if (data.email == process.env.ADMIN_EMAIL && data.secret == process.env.ADMIN_SECRET) {
-                existsUser.email = 'admin@curriculounico.com.br'
-                existsUser.role = 'ADMIN'
-                existsUser.cpf = '84753340082'
-                existsUser.fullname = 'Administrator'
-                existsUser.preferencialname = 'Admin'
-                existsUser.secret = bcrypt.hashSync(data.secret, 10);
-                existsUser.id = 0;
+                existsUser['email'] = 'admin@curriculounico.com.br'
+                existsUser['role'] = 'ADMIN'
+                existsUser['cpf'] = '84753340082'
+                existsUser['fullname'] = 'Administrator'
+                existsUser['preferencialname'] = 'Admin'
+                existsUser['secret'] = bcrypt.hashSync(data.secret, 10);
+                existsUser['id'] = 0;
             } else {
                 existsUser = await this.userService.getByEmail(data.email);
             }
-            const name = existsUser.preferencialname || existsUser.nickname || existsUser.fullname
-            if (existsUser && existsUser.email != null) {
-                if (await bcrypt.compare(data.secret, existsUser.secret)) {
-                    delete existsUser.secret
+            const name = existsUser['preferencialname'] || existsUser['nickname'] || existsUser['fullname']
+            if (existsUser && existsUser['email'] != null) {
+                if (await bcrypt.compare(data.secret, existsUser['secret'])) {
+                    delete existsUser['secret']
                     const secret = process.env.SERVER_SECRET_TOKEN || 'Currículo→Único';
                     const token = jwt.sign({
-                        id: existsUser.id,
-                        email: existsUser.email,
-                        role: existsUser.role,
-                        name: name,
+                        id: existsUser['id'],
+                        email: existsUser['email'],
+                        role: existsUser['role'],
+                        name,
                     }, secret, { expiresIn: '2h' });
 
                     console.log(`\n${existsUser['role']} ${existsUser['email']} acaba de fazer login no sistema`);
@@ -65,24 +65,25 @@ export class AuthController {
                         email: data.email,
                         expiresIn: '2h',
                         role: existsUser['role'],
-                        name: name,
+                        name,
                         token: token
                     });
 
                 } else {
                     console.log('Senha incorreta')
-                    res.status(401).json({ auth: false, message: 'Email ou senha não confere' });
+                    res.status(401).json({ auth: false, message: 'Email ou senha não confere' })
                 }
 
             } else {
                 console.log('Email não encontrado')
-                res.status(401).json({ auth: false, message: 'Email ou senha não confere' });
+                res.status(401).json({ auth: false, message: 'Email ou senha não confere' })
             }
 
             return data;
 
         } catch (err) {
-            res.status(500).json({ auth: false, message: err });
+            console.dir(err)
+            res.status(500).json({ auth: false, message: JSON.stringify(err) })
         }
     }
 
