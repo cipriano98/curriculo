@@ -43,8 +43,8 @@ export class Server {
     }
 
     async bootstrap() {
-        const app = await NestFactory.create(AppModule, { cors: true });
-
+        const app = await NestFactory.create(AppModule/* , { cors: true } */);
+        app.enableCors()
         app.setGlobalPrefix(globalPrefix);
 
         app.use(unlessMiddleware(
