@@ -1,11 +1,8 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import {
-    AgencyUpdateInput, Agency, AgencyCreateInput, AgencyWhereUniqueInput,
-    AgencyWhereInput,
-    AgencyOrderByInput,
-} from '@prisma/client';
-import { BadRequest } from '../interfaces/badRequest.interface';
+import { Injectable } from '@nestjs/common'
+import { Agency, AgencyCreateInput, AgencyOrderByInput, AgencyUpdateInput, AgencyWhereInput, AgencyWhereUniqueInput } from '@prisma/client'
+
+import { BadRequest } from '../interfaces/badRequest.interface'
+import { PrismaService } from '../prisma/prisma.service'
 
 @Injectable()
 export class AgencyService {
@@ -19,7 +16,7 @@ export class AgencyService {
             where: {
                 id
             },
-        });
+        })
     }
 
     async getMany(query?: {
@@ -36,14 +33,14 @@ export class AgencyService {
             orderBy: orderBy?.length ? { [orderBy[0]]: orderBy[1] } : {
                 id: 'asc'
             }
-        });
+        })
     }
 
     async create(data: AgencyCreateInput): Promise<Agency | BadRequest | null> {
         const { registrofederal, site } = data
         try {
             const existsAgency = await this.getByAgencyWhereUniqueInput({ registrofederal, site })
-            existsAgency.find(agency => agency.registrofederal === data.registrofederal);
+            existsAgency.find(agency => agency.registrofederal === data.registrofederal)
             console.log(`existsAgency: ${existsAgency.length ? true : false}`)
             if (!existsAgency.length) {
                 const {  } = data
@@ -60,20 +57,20 @@ export class AgencyService {
     }
 
     async update(params: {
-        data: AgencyUpdateInput;
-        where: AgencyWhereUniqueInput;
+        data: AgencyUpdateInput
+        where: AgencyWhereUniqueInput
     }): Promise<Agency> {
-        const { where, data } = params;
+        const { where, data } = params
         return this.prisma.agency.update({
             data,
             where
-        });
+        })
     }
 
     async delete(where: AgencyWhereUniqueInput): Promise<Agency> {
         return this.prisma.agency.delete({
             where,
-        });
+        })
     }
 
     /**
@@ -87,9 +84,9 @@ export class AgencyService {
         const select = 'SELECT * FROM public."Agency"'
 
         const condition = `registrofederal = '${registrofederal}' OR site = '${site}'`
-        const getByAgencyWhereUniqueInput = await this.prisma.$queryRaw(`${select} WHERE ${condition};`)
+        const getByAgencyWhereUniqueInput = await this.prisma.$queryRaw(`${select} WHERE ${condition}`)
         console.log(`Query existsAgency`)
-        console.dir(`${select} WHERE ${condition};`)
+        console.dir(`${select} WHERE ${condition}`)
 
         return getByAgencyWhereUniqueInput
     }

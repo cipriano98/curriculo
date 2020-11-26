@@ -1,11 +1,10 @@
 import { Body, Controller, Post, Res } from '@nestjs/common'
 import { User } from '@prisma/client'
 
-import { UserService } from '../user/user.service'
-
 import jwt = require('jsonwebtoken')
-
 import bcrypt = require('bcrypt')
+
+import { UserService } from '../user/user.service'
 
 @Controller('user')
 export class AuthController {
@@ -17,7 +16,7 @@ export class AuthController {
 
     @Post('/signup')
     public async signUp(@Res() res, @Body() data): Promise<User> {
-        // data.secret = bcrypt.hashSync(data.secret, 10);
+        // data.secret = bcrypt.hashSync(data.secret, 10)
         const newUser = await this.userService.create(data)
 
         if (newUser.hasOwnProperty('id')) return res.status(201).json({ newUser })
@@ -28,10 +27,10 @@ export class AuthController {
     @Post('/signin')
     public async signIn(@Res() res, @Body() data): Promise<any> {
         if (data.email === '' || data.secret === '') {
-            return res.status(400).json({ auth: false, message: 'Os campos devem ser preenchidos corretamente' });
+            return res.status(400).json({ auth: false, message: 'Os campos devem ser preenchidos corretamente' })
         }
 
-        let existsUser = {};
+        let existsUser = {}
         try {
             if (data.email == process.env.ADMIN_EMAIL && data.secret == process.env.ADMIN_SECRET) {
                 existsUser['email'] = 'admin@curriculounico.com.br'
@@ -39,25 +38,25 @@ export class AuthController {
                 existsUser['cpf'] = '84753340082'
                 existsUser['fullname'] = 'Administrator'
                 existsUser['preferencialname'] = 'Admin'
-                existsUser['secret'] = bcrypt.hashSync(data.secret, 10);
-                existsUser['id'] = 'adm';
+                existsUser['secret'] = bcrypt.hashSync(data.secret, 10)
+                existsUser['id'] = 'adm'
             } else {
-                existsUser = await this.userService.getByEmail(data.email);
+                existsUser = await this.userService.getByEmail(data.email)
             }
             const name = existsUser['preferencialname'] || existsUser['nickname'] || existsUser['fullname']
             if (existsUser && existsUser['email'] != null) {
                 if (await bcrypt.compare(data.secret, existsUser['secret'])) {
                     delete existsUser['secret']
-                    const secret = process.env.SERVER_SECRET_TOKEN || 'Currículo→Único';
+                    const secret = process.env.SERVER_SECRET_TOKEN || 'Currículo→Único'
                     const token = jwt.sign({
                         id: existsUser['id'],
                         email: existsUser['email'],
                         role: existsUser['role'],
                         name,
-                    }, secret, { expiresIn: '2h' });
+                    }, secret, { expiresIn: '2h' })
 
-                    console.log(`\n${existsUser['role']} ${existsUser['email']} acaba de fazer login no sistema`);
-                    console.log("x-access-token:", token, '\n');
+                    console.log(`\n${existsUser['role']} ${existsUser['email']} acaba de fazer login no sistema`)
+                    console.log("x-access-token:", token, '\n')
 
                     res.status(200).json({
                         auth: true,
@@ -67,7 +66,7 @@ export class AuthController {
                         role: existsUser['role'],
                         name,
                         token: token
-                    });
+                    })
 
                 } else {
                     console.log('Senha incorreta')
@@ -79,7 +78,7 @@ export class AuthController {
                 res.status(401).json({ auth: false, message: 'Email ou senha não confere' })
             }
 
-            return data;
+            return data
 
         } catch (err) {
             console.dir(err)

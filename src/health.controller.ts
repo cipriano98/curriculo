@@ -1,5 +1,6 @@
-import { Controller, Dependencies, Get, HttpCode, HttpStatus } from '@nestjs/common';
-import { HealthCheckService, DNSHealthIndicator, HealthCheck } from '@nestjs/terminus';
+import { Controller, Dependencies, Get, HttpCode, HttpStatus } from '@nestjs/common'
+import { DNSHealthIndicator, HealthCheck, HealthCheckService } from '@nestjs/terminus'
+
 @Controller('health')
 @Dependencies(HealthCheckService, DNSHealthIndicator)
 export class HealthController {

@@ -1,6 +1,7 @@
-import { Controller, Response, Get, Param, Post, Body, Put, Delete, HttpCode, Query } from '@nestjs/common';
-import { AgencyService } from './agency.service';
-import { Agency as AgencyModel } from '@prisma/client';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query, Response } from '@nestjs/common'
+import { Agency as AgencyModel } from '@prisma/client'
+
+import { AgencyService } from './agency.service'
 
 @Controller('agency')
 export class AgencyController {
@@ -31,7 +32,7 @@ export class AgencyController {
     @Delete('/:id')
     @HttpCode(200)
     async delete(@Param('id') id): Promise<AgencyModel> {
-        return this.agencyService.delete({ id: id });
+        return this.agencyService.delete({ id: id })
     }
 
     @Put('/:id')
@@ -40,7 +41,7 @@ export class AgencyController {
         return this.agencyService.update({
             data: { ...data },
             where: { id: id },
-        });
+        })
     }
 
 }

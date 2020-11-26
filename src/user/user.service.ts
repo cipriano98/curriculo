@@ -1,13 +1,9 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import {
-    UserUpdateInput, User, UserCreateInput, UserWhereUniqueInput,
-    UserWhereInput,
-    UserOrderByInput,
-    UserSelect,
-} from '@prisma/client';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
+import { User, UserCreateInput, UserOrderByInput, UserSelect, UserUpdateInput, UserWhereInput, UserWhereUniqueInput } from '@prisma/client'
 import * as bcrypt from 'bcrypt'
-import { BadRequest } from '../interfaces/badRequest.interface';
+
+import { BadRequest } from '../interfaces/badRequest.interface'
+import { PrismaService } from '../prisma/prisma.service'
 
 @Injectable()
 export class UserService {
@@ -21,7 +17,7 @@ export class UserService {
             where: {
                 id: Number(id)
             },
-        });
+        })
     }
 
     async getMany(query?: {
@@ -38,14 +34,14 @@ export class UserService {
             orderBy: orderBy?.length ? { [orderBy[0]]: orderBy[1] } : {
                 id: 'asc'
             }
-        });
+        })
     }
 
     async create(data: UserCreateInput): Promise<User | BadRequest | null> {
         const { email, cpf, nickname } = data
         const unique = { email, cpf, nickname }
         try {
-            data.secret = await bcrypt.hash(data.secret, 10);
+            data.secret = await bcrypt.hash(data.secret, 10)
             const existsUser = await this.getByUnique(unique, true)
 
             if (!existsUser.length) {
@@ -63,7 +59,7 @@ export class UserService {
             }
 
             const badRequestMessage = () => {
-                const message = {};
+                const message = {}
                 existsUser.some(user => {
                     if (user.email === email) {
                         message["email"] = "Já existe e deve ser único"
@@ -92,27 +88,27 @@ export class UserService {
 
     public async signIn(email: string, hashedPassword: string) {
         try {
-            const user = await this.getByEmail(email);
+            const user = await this.getByEmail(email)
             const isPasswordMatching = await bcrypt.compare(
                 hashedPassword,
                 user.secret
-            );
+            )
             if (!isPasswordMatching) {
-                throw new HttpException('Credenciais incorretas fornecidas', HttpStatus.BAD_REQUEST);
+                throw new HttpException('Credenciais incorretas fornecidas', HttpStatus.BAD_REQUEST)
             }
-            user.secret = undefined;
-            return user;
+            user.secret = undefined
+            return user
         } catch (error) {
-            throw new HttpException('Credenciais incorretas fornecidas', HttpStatus.BAD_REQUEST);
+            throw new HttpException('Credenciais incorretas fornecidas', HttpStatus.BAD_REQUEST)
         }
     }
 
     async update(params: {
-        data: UserUpdateInput;
-        where: UserWhereUniqueInput;
+        data: UserUpdateInput
+        where: UserWhereUniqueInput
     }): Promise<User> {
-        const { where, data } = params;
-        if (data.secret) data.secret = await bcrypt.hash(data.secret, 10);
+        const { where, data } = params
+        if (data.secret) data.secret = await bcrypt.hash(data.secret, 10)
         return this.prisma.user.update({
             data,
             where,
@@ -122,13 +118,13 @@ export class UserService {
                 Curriculum: true,
                 Profile: true
             }
-        });
+        })
     }
 
     async delete(where: UserWhereUniqueInput): Promise<User> {
         return this.prisma.user.delete({
             where,
-        });
+        })
     }
 
     async getByEmail(email: string): Promise<User> {
