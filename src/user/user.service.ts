@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
-import { User, UserCreateInput, UserOrderByInput, UserSelect, UserUpdateInput, UserWhereInput, UserWhereUniqueInput } from '@prisma/client'
+import { Address, User } from '@prisma/client'
 import * as bcrypt from 'bcrypt'
 
 import { BadRequest } from '../interfaces/badRequest.interface'
@@ -13,11 +13,20 @@ export class UserService {
     ) { }
 
     async getOne(id): Promise<User | null> {
-        return this.prisma.user.findOne({
+        const user = await this.prisma.user.findUnique({
             where: {
                 id: Number(id)
             },
+            include: {
+                Address: true,
+                Contact: true,
+                Curriculum: true,
+                Profile: true,
+                Vacancy: true
+            }
         })
+        delete user.secret
+        return user
     }
 
     async getMany(query?: {
@@ -37,7 +46,7 @@ export class UserService {
         })
     }
 
-    async create(data: UserCreateInput): Promise<User | BadRequest | null> {
+    async create(data: User): Promise<User | BadRequest | null> {
         const { email, cpf, nickname } = data
         const unique = { email, cpf, nickname }
         try {
@@ -46,15 +55,15 @@ export class UserService {
 
             if (!existsUser.length) {
                 const newUser = await this.prisma.user.create({
-                        data,
-                        include: {
-                            Address: true,
-                            Contact: true,
-                            Curriculum: true,
-                            Profile: true
-                        }
-                    })
-                    delete newUser.secret
+                    data,
+                    include: {
+                        Address: true,
+                        Contact: true,
+                        Curriculum: true,
+                        Profile: true
+                    }
+                })
+                delete newUser.secret
                 return newUser
             }
 
@@ -104,8 +113,8 @@ export class UserService {
     }
 
     async update(params: {
-        data: UserUpdateInput
-        where: UserWhereUniqueInput
+        data: any
+        where: any
     }): Promise<User> {
         const { where, data } = params
         if (data.secret) data.secret = await bcrypt.hash(data.secret, 10)
@@ -116,19 +125,31 @@ export class UserService {
                 Address: true,
                 Contact: true,
                 Curriculum: true,
-                Profile: true
+                Profile: true,
+                Vacancy: true
             }
         })
     }
 
-    async delete(where: UserWhereUniqueInput): Promise<User> {
-        return this.prisma.user.delete({
-            where,
+    async delete(user: any): Promise<User> {
+
+        await this.prisma.address.deleteMany({ where: { userid: user.id } })
+        await this.prisma.contact.deleteMany({ where: { userid: user.id } })
+        await this.prisma.curriculum.deleteMany({ where: { userid: user.id } })
+        await this.prisma.profile.deleteMany({ where: { userId: user.id } })
+        await this.prisma.vacancy.deleteMany({ where: { userId: user.id } })
+
+        return await this.prisma.user.delete({
+            where: { id: user.id },
+            include: {
+                Profile: true,
+                Vacancy: true
+            }
         })
     }
 
     async getByEmail(email: string): Promise<User> {
-        const getByEmail = await this.prisma.user.findOne({
+        const getByEmail = await this.prisma.user.findUnique({
             where: { email },
         })
         return getByEmail
@@ -140,7 +161,7 @@ export class UserService {
      * @description Este método verifica de acordo com os parâmetros, a existência desses usuários
      * @returns Retorna um array de todos os usuários que estão nesta condição
      * */
-    async getByUnique(unique: UserWhereUniqueInput, compareNullValues = false): Promise<UserWhereUniqueInput[]> {
+    async getByUnique(unique: any, compareNullValues = false): Promise<any[]> {
         const { email, cpf, nickname } = unique
         const select = 'SELECT email, cpf, nickname FROM public."User"'
 

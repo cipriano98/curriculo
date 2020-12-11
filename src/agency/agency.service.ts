@@ -12,7 +12,7 @@ export class AgencyService {
     ) { }
 
     async getOne(id): Promise<Agency | null> {
-        return this.prisma.agency.findOne({
+        return this.prisma.agency.findUnique({
             where: {
                 id
             },

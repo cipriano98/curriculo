@@ -32,8 +32,10 @@ export class AuthController {
 
         let existsUser = {}
         try {
+            const avatar = 'https://res.cloudinary.com/programathor/image/upload/c_fit,h_200,w_200/v1601806876/ub9t4tjfsfzqe4yamhuu.png'
             if (data.email == process.env.ADMIN_EMAIL && data.secret == process.env.ADMIN_SECRET) {
                 existsUser['email'] = 'admin@curriculounico.com.br'
+                existsUser['avatar'] = avatar
                 existsUser['role'] = 'ADMIN'
                 existsUser['cpf'] = '84753340082'
                 existsUser['fullname'] = 'Administrator'
@@ -50,6 +52,7 @@ export class AuthController {
                     const secret = process.env.SERVER_SECRET_TOKEN || 'Currículo→Único'
                     const token = jwt.sign({
                         id: existsUser['id'],
+                        avatar: existsUser['avatar'] || avatar,
                         email: existsUser['email'],
                         role: existsUser['role'],
                         name,
