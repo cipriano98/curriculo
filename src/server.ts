@@ -40,6 +40,7 @@ export class Server {
             tokenMiddleware,
             `${globalPrefix}/user/signin`,
             `${globalPrefix}/user/signup`,
+            `${globalPrefix}/user/vacancy`,
             `${globalPrefix}/health/status`,
         ))
 
