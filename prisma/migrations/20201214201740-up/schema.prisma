@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
     provider = "postgresql"
-    url      = env("DATABASE_URL")
+    url = "***"
 }
 
 model Profile {
@@ -113,8 +113,8 @@ model Curriculum {
     userid Int  @unique
     User   User @relation(fields: [userid], references: [id])
 
-    academicdata AcademicData?
-    experiences  Experiences?
+    academicdata AcademicData[]
+    experiences  Experiences[]
 
     createdat DateTime @default(now())
     updatedat DateTime @updatedAt

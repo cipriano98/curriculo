@@ -7,7 +7,6 @@ import { UserService } from './user.service'
 export class UserController {
     constructor(
         private readonly userService: UserService,
-        // private readonly postService: PostService,
     ) { }
 
     @Post('/')
@@ -22,6 +21,18 @@ export class UserController {
     @HttpCode(200)
     async getMany(@Query() query): Promise<UserModel[]> {
         return this.userService.getMany(query)
+    }
+
+    @Get('/candidate')
+    @HttpCode(200)
+    async getManyCandidates(@Query() query): Promise<UserModel[]> {
+        return this.userService.getMany(query, 'CANDIDATE')
+    }
+
+    @Get('/employer')
+    @HttpCode(200)
+    async getManyEmployers(@Query() query): Promise<UserModel[]> {
+        return this.userService.getMany(query, 'EMPLOYER')
     }
 
     @Get('/:id')

@@ -36,7 +36,7 @@ export class AgencyService {
         })
     }
 
-    async create(data: AgencyCreateInput): Promise<Agency | BadRequest | null> {
+    async create(data: any): Promise<Agency | BadRequest | null> {
         const { registrofederal, site } = data
         try {
             const existsAgency = await this.getByAgencyWhereUniqueInput({ registrofederal, site })
@@ -57,8 +57,8 @@ export class AgencyService {
     }
 
     async update(params: {
-        data: AgencyUpdateInput
-        where: AgencyWhereUniqueInput
+        data: any
+        where: any
     }): Promise<Agency> {
         const { where, data } = params
         return this.prisma.agency.update({
@@ -67,7 +67,7 @@ export class AgencyService {
         })
     }
 
-    async delete(where: AgencyWhereUniqueInput): Promise<Agency> {
+    async delete(where: any): Promise<Agency> {
         return this.prisma.agency.delete({
             where,
         })
@@ -79,7 +79,7 @@ export class AgencyService {
      * @description Este método verifica de acordo com os parâmetros, a existência desses usuários
      * @returns Retorna um array de todos os usuários que estão nesta condição
      * */
-    async getByAgencyWhereUniqueInput(unique: AgencyWhereUniqueInput): Promise<AgencyWhereUniqueInput[]> {
+    async getByAgencyWhereUniqueInput(unique: any): Promise<any[]> {
         const { registrofederal, site } = unique
         const select = 'SELECT * FROM public."Agency"'
 

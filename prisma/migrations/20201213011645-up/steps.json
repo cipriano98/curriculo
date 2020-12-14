@@ -1,0 +1,17 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "Vacancy",
+      "field": "Interested",
+      "type": "User",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "Vacancy",
+      "field": "user"
+    }
+  ]
+}

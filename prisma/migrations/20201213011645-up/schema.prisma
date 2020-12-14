@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
     provider = "postgresql"
-    url      = env("DATABASE_URL")
+    url = "***"
 }
 
 model Profile {
@@ -36,20 +36,20 @@ model User {
     role             Role    @default(CANDIDATE)
     gender           Gender
 
-    Address    Address?
-    Contact    Contact?
+    Address    Address[]
+    Contact    Contact[]
     Curriculum Curriculum?
     Profile    Profile?
-    Vacancy    Vacancy[]
 
-    createdat DateTime @default(now())
-    updatedat DateTime @updatedAt
+    createdat DateTime  @default(now())
+    updatedat DateTime  @updatedAt
+    Vacancy   Vacancy[]
 }
 
 model Address {
     id String @id @default(uuid())
 
-    name       String? @default("Casa")
+    name       String?
     logradouro String?
     bairro     String?
     cidade     String?
@@ -66,11 +66,9 @@ model Address {
 model Contact {
     id String @id @default(uuid())
 
-    userid    Int
-    talkto    String? @default("me")
-    phone     String?
-    talktotwo String?
-    phonetwo  String?
+    userid Int
+    talkto String? @default("me")
+    phone  String?
 
     User User @relation(fields: [userid], references: [id])
 
@@ -113,8 +111,8 @@ model Curriculum {
     userid Int  @unique
     User   User @relation(fields: [userid], references: [id])
 
-    academicdata AcademicData?
-    experiences  Experiences?
+    academicdata AcademicData[]
+    experiences  Experiences[]
 
     createdat DateTime @default(now())
     updatedat DateTime @updatedAt
@@ -151,15 +149,11 @@ model Agency {
 }
 
 model Vacancy {
-    codeVacancy Int @id @default(autoincrement())
+    codeVacancy Int    @id @default(autoincrement())
+    userid      Int
+    Interested  User[]
 
-    avatar     String?
-    userid     Int
-    Interested User[]
-
-    active      Boolean?
-    name        String?
-    office      String?
+    office      String
     logo        String?
     description String?
 }

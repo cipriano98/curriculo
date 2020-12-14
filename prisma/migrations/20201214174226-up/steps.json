@@ -1,0 +1,44 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateField",
+      "model": "Contact",
+      "field": "talktotwo",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "Contact",
+          "field": "talktotwo"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "Contact",
+          "field": "talktotwo"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "\"me\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "Contact",
+      "field": "phonetwo",
+      "type": "String",
+      "arity": "Optional"
+    }
+  ]
+}

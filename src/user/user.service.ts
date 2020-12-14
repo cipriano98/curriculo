@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
-import { Address, User } from '@prisma/client'
+import { User, UserCreateInput } from '@prisma/client'
 import * as bcrypt from 'bcrypt'
 
 import { BadRequest } from '../interfaces/badRequest.interface'
@@ -8,8 +8,7 @@ import { PrismaService } from '../prisma/prisma.service'
 @Injectable()
 export class UserService {
     constructor(
-        private readonly prisma: PrismaService,
-        // private readonly utils: UtilService,
+        private readonly prisma: PrismaService
     ) { }
 
     async getOne(id): Promise<User | null> {
@@ -33,21 +32,46 @@ export class UserService {
         skip?: string
         take?: string
         orderBy?: any
-    }): Promise<User[]> {
+    }, typeUser?): Promise<User[]> {
+        const where = { id: { gt: 0 } }
+
+        if (typeUser) where['role'] = typeUser
 
         const orderBy = query.orderBy ? query.orderBy.split(',') : []
-
         return this.prisma.user.findMany({
             skip: Number(query.skip) || 0,
             take: Number(query.take) || 100,
             orderBy: orderBy?.length ? { [orderBy[0]]: orderBy[1] } : {
                 id: 'asc'
-            }
+            },
+            where: where
         })
     }
 
-    async create(data: User): Promise<User | BadRequest | null> {
+    async create(data: UserCreateInput): Promise<User | BadRequest | null> {
         const { email, cpf, nickname } = data
+
+        data["Address"] = { create: {} }
+        data["Contact"] = { create: {} }
+        data["Curriculum"] = { create: {} }
+        data["Profile"] = { create: {} }
+        data["Vacancy"] = { create: [] }
+        const include = {
+            Address: true,
+            Contact: true,
+            Curriculum: true,
+            Profile: true,
+            Vacancy: true
+        }
+
+        if (cpf.length === 14) {
+            data.role = "EMPLOYER"
+            delete include.Curriculum
+        }
+
+
+
+
         const unique = { email, cpf, nickname }
         try {
             data.secret = await bcrypt.hash(data.secret, 10)
@@ -56,12 +80,7 @@ export class UserService {
             if (!existsUser.length) {
                 const newUser = await this.prisma.user.create({
                     data,
-                    include: {
-                        Address: true,
-                        Contact: true,
-                        Curriculum: true,
-                        Profile: true
-                    }
+                    include: include
                 })
                 delete newUser.secret
                 return newUser
@@ -119,32 +138,47 @@ export class UserService {
         const { where, data } = params
         if (data.secret) data.secret = await bcrypt.hash(data.secret, 10)
         return this.prisma.user.update({
-            data,
+            data: data,
             where,
-            include: {
-                Address: true,
-                Contact: true,
-                Curriculum: true,
-                Profile: true,
-                Vacancy: true
-            }
+            // include: {
+            //     Address: true,
+            //     Contact: true,
+            //     Curriculum: true,
+            //     Profile: true,
+            //     Vacancy: true
+            // }
         })
     }
 
     async delete(user: any): Promise<User> {
 
+        /* 
+        delete user.Address
+        delete user.Contact
+        delete user.Curriculum
+        delete user.Profile
+        delete user.Vacancy
+
+        await this.prisma.user.update({
+            where: { id: user.id },
+            data: {
+                Address: { deleteMany: true },
+                Contact: { deleteMany: true },
+                Curriculum: { delete: true },
+                Profile: { delete: true },
+                Vacancy: { deleteMany: true },
+            },
+        })
+        */
+
         await this.prisma.address.deleteMany({ where: { userid: user.id } })
         await this.prisma.contact.deleteMany({ where: { userid: user.id } })
         await this.prisma.curriculum.deleteMany({ where: { userid: user.id } })
-        await this.prisma.profile.deleteMany({ where: { userId: user.id } })
-        await this.prisma.vacancy.deleteMany({ where: { userId: user.id } })
+        await this.prisma.profile.deleteMany({ where: { userid: user.id } })
+        await this.prisma.vacancy.deleteMany({ where: { userid: user.id } })
 
         return await this.prisma.user.delete({
-            where: { id: user.id },
-            include: {
-                Profile: true,
-                Vacancy: true
-            }
+            where: { id: user.id }
         })
     }
 

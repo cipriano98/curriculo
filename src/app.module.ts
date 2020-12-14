@@ -9,6 +9,8 @@ import { HealthController } from './health.controller'
 import { PrismaService } from './prisma/prisma.service'
 import { UserModule } from './user/user.module'
 import { ValidatorModule } from './utils/validator/validator.module'
+import { VacancyController } from './vacancy/vacancy.controller';
+import { VacancyService } from './vacancy/vacancy.service';
 
 @Module({
     imports: [
@@ -21,10 +23,11 @@ import { ValidatorModule } from './utils/validator/validator.module'
         ValidatorModule,
         AgencyModule
     ],
-    controllers: [HealthController],
+    controllers: [HealthController, VacancyController],
     providers: [
         PrismaService,
-        AgencyService
+        AgencyService,
+        VacancyService
     ],
 })
 export class AppModule { }
