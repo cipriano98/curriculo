@@ -24,4 +24,20 @@ export class VacancyController {
             console.dir(`Erro na Controller: ${error}`) 
         }
     }
+
+    @Get('/:codeVacancy')
+    @HttpCode(200)
+    async getOne(@Param('codeVacancy') codeVacancy): Promise<VacancyModel> {
+        return await this.vacancyService.getOne(Number(codeVacancy))
+    }
+
+    @Put('/:codeVacancy')
+    @HttpCode(200)
+    async update(@Body() vacancy, @Param('codeVacancy') codeVacancy: string): Promise<VacancyModel> {
+        try {
+            return await this.vacancyService.update(vacancy, Number(codeVacancy))
+        } catch (error) {
+            console.dir(`Erro na Controller: ${error}`) 
+        }
+    }
 }

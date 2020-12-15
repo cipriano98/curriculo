@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { Vacancy } from '@prisma/client';
+import { Injectable } from '@nestjs/common'
+import { Vacancy } from '@prisma/client'
 
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service'
 
 @Injectable()
 export class VacancyService {
@@ -15,8 +15,8 @@ export class VacancyService {
             data: { ...vacancy }
         })
     }
-    
-    // async getManyVacancy(query?: {
+
+    // async getMany(query?: {
     //     skip?: string
     //     take?: string
     //     orderBy?: any
@@ -30,13 +30,45 @@ export class VacancyService {
     //             codeVacancy: 'asc'
     //         }
     //     })
-        
     // }
+
     async getMany(): Promise<Vacancy[]> {
         try {
-            return await this.prisma.vacancy.findMany()
+            return await this.prisma.vacancy.findMany({
+                include: {
+                    Interested: true,
+                }
+            })
         } catch (error) {
-            console.dir(`Erro na Service: ${error}`) 
+            console.dir(`Erro na Service: ${error}`)
+        }
+    }
+
+    async getOne(codeVacancy: number): Promise<Vacancy | null> {
+        console.dir(codeVacancy)
+        const vacancy = await this.prisma.vacancy.findUnique({
+            where: {
+                codeVacancy
+            },
+            include: {
+                Interested: true,
+            }
+        })
+        return vacancy
+    }
+
+    async update(vacancy: Vacancy, codeVacancy: number): Promise<Vacancy> {
+        console.dir(vacancy)
+        console.dir(codeVacancy)
+        try {
+            return await this.prisma.vacancy.update({
+                data: { ...vacancy },
+                where: {
+                    codeVacancy
+                }
+            })
+        } catch (error) {
+            console.dir(`Erro na Service: ${error}`)
         }
     }
 }
