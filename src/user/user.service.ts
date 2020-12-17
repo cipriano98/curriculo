@@ -24,7 +24,8 @@ export class UserService {
                 Vacancy: true
             }
         })
-        delete user.secret
+        if(user) delete user.secret
+        console.log(user)
         return user
     }
 

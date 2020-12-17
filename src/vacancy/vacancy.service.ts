@@ -17,29 +17,19 @@ export class VacancyService {
     }
 
     async getMany(query?): Promise<Vacancy[]> {
-        console.dir(query);
         try {
             const where = {
                 codeVacancy: {
                     gt: 0
                 },
                 userid: Number(query.userId),
-                // Interested: {
-                //     some: {
-                //         id: { equals: Number(query.userId) }
-                //     }
-                // }
             }
 
             if (query.userId) {
                 delete where.codeVacancy
-                where['userid'] = Number(query.userId)
-                // if (!query.candidacy) delete where.Interested
-                
+                where['userid'] = Number(query.userId)      
             }
             else delete where.userid
-
-            console.dir(query)
 
             const vacancy = await this.prisma.vacancy.findMany({
                 where: where,
@@ -60,7 +50,6 @@ export class VacancyService {
     }
 
     async getOne(codeVacancy: number): Promise<Vacancy | null> {
-        console.dir(codeVacancy)
         const vacancy = await this.prisma.vacancy.findUnique({
             where: {
                 codeVacancy
