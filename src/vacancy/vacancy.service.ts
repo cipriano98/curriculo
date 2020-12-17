@@ -16,31 +16,46 @@ export class VacancyService {
         })
     }
 
-    // async getMany(query?: {
-    //     skip?: string
-    //     take?: string
-    //     orderBy?: any
-    // }): Promise<Vacancy[]> {
-    //     console.dir('Service')
-    //     const orderBy = query.orderBy ? query.orderBy.split(',') : []
-    //     return this.prisma.vacancy.findMany({
-    //         skip: Number(query.skip) || 0,
-    //         take: Number(query.take) || 100,
-    //         orderBy: orderBy?.length ? { [orderBy[0]]: orderBy[1] } : {
-    //             codeVacancy: 'asc'
-    //         }
-    //     })
-    // }
-
-    async getMany(): Promise<Vacancy[]> {
+    async getMany(query?): Promise<Vacancy[]> {
+        console.dir(query);
         try {
-            return await this.prisma.vacancy.findMany({
+            const where = {
+                codeVacancy: {
+                    gt: 0
+                },
+                userid: Number(query.userId),
+                // Interested: {
+                //     some: {
+                //         id: { equals: Number(query.userId) }
+                //     }
+                // }
+            }
+
+            if (query.userId) {
+                delete where.codeVacancy
+                where['userid'] = Number(query.userId)
+                // if (!query.candidacy) delete where.Interested
+                
+            }
+            else delete where.userid
+
+            console.dir(query)
+
+            const vacancy = await this.prisma.vacancy.findMany({
+                where: where,
+                orderBy: { codeVacancy: "asc" },
                 include: {
                     Interested: true,
                 }
             })
+
+            return vacancy
+
         } catch (error) {
-            console.dir(`Erro na Service: ${error}`)
+            console.dir(`Erro na Service:`)
+            console.dir(error)
+            console.dir(error.name)
+            console.dir(error.message)
         }
     }
 
@@ -57,18 +72,26 @@ export class VacancyService {
         return vacancy
     }
 
-    async update(vacancy: Vacancy, codeVacancy: number): Promise<Vacancy> {
-        console.dir(vacancy)
-        console.dir(codeVacancy)
+    async update(vacancy: Vacancy, codeVacancy: number, userId?: number): Promise<Vacancy> {
         try {
+            if (userId) {
+                vacancy['Interested'] = { connect: [{ id: userId }] }
+            }
+            console.dir(vacancy);
             return await this.prisma.vacancy.update({
-                data: { ...vacancy },
+                data: {
+                    ...vacancy
+                },
                 where: {
                     codeVacancy
+                },
+                include: {
+                    Interested: true,
                 }
             })
         } catch (error) {
             console.dir(`Erro na Service: ${error}`)
         }
     }
+
 }
