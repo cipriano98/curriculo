@@ -24,6 +24,7 @@
         "ts-dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/main.ts --ignore tests",
         "dev": "nodemon",
         "hot": "nest build --webpack --webpackPath hot-reload.config.js",
+        "deploy:log": "heroku logs -a curriculo-unico --tail",
         "doc": "compodoc -p tsconfig.json -s -w --language pt-BR --theme stripe -n \"Currículo Único Documentation\" -o --port 3030",
         "debug": "nest build && nest start --debug --watch",
         "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
