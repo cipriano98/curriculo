@@ -41,7 +41,7 @@ export class AuthController {
                 existsUser['fullname'] = 'Administrator'
                 existsUser['preferencialname'] = 'Admin'
                 existsUser['secret'] = bcrypt.hashSync(data.secret, 10)
-                existsUser['id'] = 'adm'
+                existsUser['id'] = 0
             } else {
                 existsUser = await this.userService.getByEmail(data.email)
             }
