@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query, Response } from '@nestjs/common'
+import { Body, Controller, Get, HttpCode, Param, Post, Put, Query } from '@nestjs/common'
 import { Vacancy as VacancyModel } from '@prisma/client'
 
 import { VacancyService } from './vacancy.service'
@@ -17,9 +17,9 @@ export class VacancyController {
 
     @Get('')
     @HttpCode(200)
-    async getMany(): Promise<VacancyModel[]> {
+    async getMany(@Query() query?): Promise<VacancyModel[]> {
         try {
-            return await this.vacancyService.getMany()
+            return await this.vacancyService.getMany(query)
         } catch (error) {
             console.dir(`Erro na Controller: ${error}`) 
         }
@@ -36,6 +36,16 @@ export class VacancyController {
     async update(@Body() vacancy, @Param('codeVacancy') codeVacancy: string): Promise<VacancyModel> {
         try {
             return await this.vacancyService.update(vacancy, Number(codeVacancy))
+        } catch (error) {
+            console.dir(`Erro na Controller: ${error}`) 
+        }
+    }
+
+    @Put('/:codeVacancy/connect/:userId')
+    @HttpCode(200)
+    async connect(@Body() vacancy, @Param('codeVacancy') codeVacancy: string, @Param('userId') userId: string): Promise<VacancyModel> {
+        try {
+            return await this.vacancyService.update(vacancy, Number(codeVacancy), Number(userId))
         } catch (error) {
             console.dir(`Erro na Controller: ${error}`) 
         }
